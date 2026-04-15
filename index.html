@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valadares Builders Solutions – Construction &amp; Renovation</title>
+  <meta name="description" content="Valadares Builders Solutions – Construction, renovation and project management across the UK. Honest quotes, solid workmanship." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+/* ══════════════════════════════════════════════════════════
+   DESIGN SYSTEM
+══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Typography — slab + sans sólidos (obra / pedreiro, não joalharia) */
+  --font-serif: 'Bitter', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  /* Palette (original) */
+  --cream:       #F7F3EE;
+  --cream-deep:  #EDE6D9;
+  --white:       #FFFFFF;
+  --gold:        #B8943B;
+  --gold-mid:    #C9A84C;
+  --gold-light:  #DFC47A;
+  --gold-pale:   #F5EDD6;
+  --charcoal:    #1A1714;
+  --stone:       #4A4540;
+  --slate:       #7A736A;
+  --mist:        #A89E94;
+  --border:      rgba(184,148,59,0.18);
+  --border-soft: rgba(0,0,0,0.06);
+  --shadow-sm:   0 2px 12px rgba(26,23,20,0.07);
+  --shadow-md:   0 8px 32px rgba(26,23,20,0.10);
+  --shadow-lg:   0 24px 64px rgba(26,23,20,0.13);
+  --shadow-gold: 0 8px 32px rgba(184,148,59,0.22);
+  --glass:       rgba(255,255,255,0.72);
+  --glass-gold:  rgba(245,237,214,0.55);
+  /* Largura útil global (mais largo) */
+  --page-max:    min(1520px, 96vw);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--charcoal);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── UTILITIES ─── */
+.container { max-width: var(--page-max); margin: 0 auto; padding: 0 clamp(18px, 3.5vw, 36px); }
+
+h1,h2,h3 { font-family: var(--font-serif); font-weight: 700; letter-spacing: -0.01em; }
+
+.label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+  font-family: var(--font-sans);
+}
+.divider {
+  width: 56px; height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 1px; margin: 1.2rem 0 2.2rem;
+}
+
+/* ── REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-l { opacity: 0; transform: translateX(-32px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal-l.visible { opacity: 1; transform: none; }
+.reveal-r { opacity: 0; transform: translateX(32px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal-r.visible { opacity: 1; transform: none; }
+
+/* ════════════════════════════════════════════════════════
+   COOKIE BANNER
+════════════════════════════════════════════════════════ */
+#cookie-banner {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, calc(100vw - 40px));
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 18px 22px;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  z-index: 9999; box-shadow: var(--shadow-lg);
+  animation: slideUp 0.5s ease;
+}
+#cookie-banner p { flex: 1; font-size: 0.82rem; color: var(--slate); min-width: 200px; }
+#cookie-banner p a { color: var(--gold); text-decoration: none; font-weight: 600; }
+.ck-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.ck-accept {
+  background: var(--charcoal); color: var(--white);
+  border: none; padding: 9px 20px; border-radius: 8px;
+  cursor: pointer; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  transition: background 0.2s;
+}
+.ck-accept:hover { background: var(--gold); }
+.ck-decline {
+  background: transparent; color: var(--slate);
+  border: 1px solid var(--border-soft); padding: 9px 20px;
+  border-radius: 8px; cursor: pointer; font-size: 0.82rem;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s, color 0.2s;
+}
+.ck-decline:hover { border-color: var(--gold); color: var(--charcoal); }
+
+/* ════════════════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════════════════ */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+header.scrolled {
+  background: rgba(247,243,238,0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+/* Nav sobre vídeo — branco com brilho / sombra (legível no vídeo) */
+header:not(.scrolled) .nav-links a:not(.nav-cta) {
+  color: rgba(255,255,255,0.95);
+  text-shadow:
+    0 2px 14px rgba(0,0,0,0.5),
+    0 0 20px rgba(255,255,255,0.25);
+  transition: color 0.3s, text-shadow 0.3s;
+}
+header:not(.scrolled) .nav-links a:not(.nav-cta):hover {
+  color: var(--white);
+  text-shadow:
+    0 2px 18px rgba(0,0,0,0.6),
+    0 0 32px rgba(255,255,255,0.45);
+}
+header:not(.scrolled) .nav-links a:not(.nav-cta).nav-active {
+  color: var(--white);
+  font-weight: 700;
+  text-shadow:
+    0 2px 16px rgba(0,0,0,0.55),
+    0 0 26px rgba(255,255,255,0.4);
+}
+header:not(.scrolled) .hamburger span { background: var(--white); }
+header:not(.scrolled) .logo-img {
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.45));
+}
+header:not(.scrolled) .nav-cta {
+  background: var(--white) !important;
+  color: var(--charcoal) !important;
+}
+header:not(.scrolled) .nav-cta:hover {
+  background: var(--gold) !important;
+  color: var(--charcoal) !important;
+}
+header.scrolled .nav-links a.nav-active {
+  color: var(--charcoal);
+  font-weight: 700;
+}
+nav {
+  max-width: var(--page-max); margin: 0 auto; padding: 0 clamp(18px, 3.5vw, 36px);
+  display: flex; align-items: center; justify-content: space-between;
+  height: 78px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-img {
+  height: 48px;
+  width: auto;
+  max-width: min(280px, 58vw);
+  object-fit: contain;
+  display: block;
+}
+footer .logo-wrap .logo-img { height: 44px; max-width: min(260px, 85vw); }
+.logo-txt .brand {
+  font-family: var(--font-serif); font-size: 1.25rem;
+  font-weight: 700; color: var(--charcoal); letter-spacing: 0.04em;
+  line-height: 1;
+}
+.logo-txt .tag {
+  font-size: 0.56rem; color: var(--slate); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-top: 2px;
+  font-family: var(--font-sans);
+}
+
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--stone); text-decoration: none;
+  position: relative; padding-bottom: 3px; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px;
+  background: var(--gold); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--charcoal); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--charcoal) !important; color: var(--white) !important;
+  padding: 10px 22px !important; border-radius: 8px !important;
+  font-weight: 600 !important; letter-spacing: 0.06em !important;
+  transition: background 0.3s, box-shadow 0.3s !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--gold) !important; box-shadow: var(--shadow-gold) !important; }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px;
+}
+.hamburger span { width: 24px; height: 1.5px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s; display: block; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+.mob-menu {
+  display: none; position: fixed; inset: 0; top: 78px;
+  background: rgba(247,243,238,0.97); backdrop-filter: blur(24px);
+  z-index: 999; flex-direction: column; align-items: center;
+  justify-content: center; gap: 40px;
+}
+.mob-menu.open { display: flex; }
+.mob-menu a {
+  font-family: var(--font-serif); font-size: 2rem;
+  color: var(--charcoal); text-decoration: none; font-weight: 700;
+  transition: color 0.3s;
+}
+.mob-menu a:hover { color: var(--gold); }
+
+/* ════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal);
+  padding: 88px 0 clamp(28px, 5vh, 56px);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Escuro só onde está o texto; direita quase limpa para o vídeo aparecer */
+  background:
+    linear-gradient(95deg, rgba(20,18,16,0.78) 0%, rgba(20,18,16,0.42) 34%, rgba(20,18,16,0.14) 55%, rgba(20,18,16,0.06) 72%, transparent 88%),
+    linear-gradient(to top, rgba(15,14,12,0.65) 0%, transparent 42%);
+}
+
+@media (max-width: 900px) {
+  .hero-scrim {
+    background:
+      linear-gradient(180deg, rgba(20,18,16,0.35) 0%, rgba(20,18,16,0.55) 40%, rgba(20,18,16,0.82) 100%),
+      linear-gradient(to top, rgba(15,14,12,0.45) 0%, transparent 40%);
+  }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 clamp(18px, 3.5vw, 36px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto;
+  column-gap: clamp(24px, 4vw, 48px);
+  align-items: end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+
+.hero-copy {
+  min-width: 0;
+  grid-column: 1;
+}
+
+/* aside: bloco compacto — não rouba o vídeo */
+.hero-visual {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 260px;
+}
+.h-card {
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  backdrop-filter: blur(8px);
+}
+.h-card-icon { font-size: 1.1rem; margin-bottom: 4px; }
+.h-card h4 { font-family: var(--font-serif); font-size: 0.88rem; font-weight: 700; margin-bottom: 2px; }
+.h-card p { font-size: 0.68rem; color: var(--slate); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.h-card-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gold-pale);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 0.6rem; color: var(--gold); font-weight: 700; margin-top: 6px;
+  font-family: var(--font-sans);
+}
+.h-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.h-stat {
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  backdrop-filter: blur(6px);
+}
+.h-stat .num { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.h-stat .lbl { font-size: 0.55rem; color: var(--stone); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(245,237,214,0.95);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 5px 12px;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.11em;
+  text-transform: uppercase; color: var(--stone); margin-bottom: 16px;
+  animation: fadeInDown 0.9s ease both;
+}
+.hero-badge span { width: 5px; height: 5px; border-radius: 1px; background: var(--gold); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4.2vw, 3.35rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+  max-width: min(100%, 15em);
+  margin-bottom: 14px;
+  color: var(--white);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.45);
+  animation: fadeInUp 0.9s 0.2s ease both;
+}
+.hero-h1 em {
+  font-style: italic; font-weight: 700; color: var(--gold-light);
+  display: block; margin-top: 0.04em;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.5);
+}
+
+.hero-p {
+  font-size: 0.95rem; color: rgba(255,255,255,0.86);
+  max-width: 28rem;
+  margin-bottom: 20px;
+  font-weight: 400; line-height: 1.65;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+  animation: fadeInUp 0.9s 0.35s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: fadeInUp 0.9s 0.5s ease both;
+}
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--charcoal); color: var(--white);
+  padding: 11px 22px; border-radius: 5px; font-size: 0.82rem;
+  font-weight: 700; text-decoration: none; letter-spacing: 0.03em;
+  border: none; cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.btn-dark:hover { background: var(--gold); box-shadow: var(--shadow-gold); transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06);
+  color: var(--white);
+  padding: 10px 20px; border-radius: 5px; font-size: 0.82rem;
+  font-weight: 600; text-decoration: none; letter-spacing: 0.03em;
+  border: 1px solid rgba(255,255,255,0.4); cursor: pointer;
+  font-family: var(--font-sans);
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.btn-ghost:hover {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  background: rgba(255,255,255,0.1);
+}
+
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(18px, 3vh, 28px);
+  animation: fadeIn 1s 1s both;
+}
+.scroll-bar { width: 1px; height: 36px; background: linear-gradient(var(--gold-light), transparent); }
+.scroll-txt { font-size: 0.65rem; letter-spacing: 0.22em; color: rgba(255,255,255,0.55); text-transform: uppercase; writing-mode: vertical-rl; }
+
+/* ════════════════════════════════════════════════════════
+   SECTION SHARED
+════════════════════════════════════════════════════════ */
+.sec { padding: 112px 0; }
+.sec-alt { background: var(--white); }
+.sec-alt2 { background: var(--cream-deep); }
+
+.sec-head { margin-bottom: 72px; }
+.sec-head.center { text-align: center; }
+.sec-head.center .divider { margin-left: auto; margin-right: auto; }
+.sec-head h2 { font-size: clamp(2.2rem, 3.8vw, 3.2rem); line-height: 1.15; letter-spacing: -0.02em; }
+.sec-head p { color: var(--slate); font-size: 1rem; margin-top: 1rem; max-width: 520px; }
+.sec-head.center p { margin-left: auto; margin-right: auto; }
+
+/* ════════════════════════════════════════════════════════
+   STRIP (logos / certifications)
+════════════════════════════════════════════════════════ */
+.strip {
+  background: var(--charcoal); padding: 20px 0; overflow: hidden;
+}
+.strip-inner {
+  display: flex; align-items: center;
+  animation: marquee 30s linear infinite; white-space: nowrap; width: max-content;
+}
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.strip-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 48px; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45);
+}
+.strip-item span { color: var(--gold-light); }
+
+/* ════════════════════════════════════════════════════════
+   ABOUT
+════════════════════════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 72px); align-items: center; }
+
+.about-img-wrap { position: relative; }
+.about-img-main {
+  border-radius: 10px; overflow: hidden;
+  background: linear-gradient(135deg, var(--cream-deep), var(--gold-pale));
+  aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center;
+  font-size: 7rem; position: relative;
+  box-shadow: var(--shadow-lg);
+}
+.about-img-main::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(26,23,20,0.06) 100%);
+}
+.about-img-tag {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px 22px;
+  box-shadow: var(--shadow-md);
+}
+.about-img-tag .num { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.about-img-tag .lbl { font-size: 0.68rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 3px; }
+
+.about-img-badge {
+  position: absolute; top: 24px; left: -28px;
+  background: var(--charcoal); color: var(--white);
+  border-radius: 12px; padding: 14px 18px;
+  box-shadow: var(--shadow-md);
+}
+.about-img-badge .badge-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 3px; }
+.about-img-badge .badge-val { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
+
+.about-text h2 { font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 8px; }
+.about-text > p { color: var(--slate); margin-bottom: 18px; font-size: 0.97rem; }
+
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 28px 0 36px; }
+.feat-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 0.93rem; color: var(--stone);
+}
+.feat-icon {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  background: var(--gold-pale); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 0.85rem;
+}
+.feat-text strong { display: block; font-size: 0.9rem; color: var(--charcoal); margin-bottom: 1px; }
+.feat-text span { font-size: 0.82rem; color: var(--slate); }
+
+/* ════════════════════════════════════════════════════════
+   SERVICES
+════════════════════════════════════════════════════════ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, minmax(168px, auto)) auto;
+  gap: 20px;
+}
+.services-grid .srv:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+.services-grid .srv:nth-child(2) { grid-column: 3; grid-row: 1; }
+.services-grid .srv:nth-child(3) { grid-column: 3; grid-row: 2; }
+.services-grid .srv:nth-child(4) { grid-column: 1; grid-row: 3; }
+.services-grid .srv:nth-child(5) { grid-column: 2; grid-row: 3; }
+.services-grid .srv:nth-child(6) { grid-column: 3; grid-row: 3; }
+.services-grid .srv:nth-child(1) .srv-n {
+  font-size: clamp(4.5rem, 12vw, 7rem);
+  top: 8px; right: 16px;
+}
+.services-grid .srv:nth-child(1) h3 { font-size: clamp(1.35rem, 2.2vw, 1.55rem); }
+.services-grid .srv:nth-child(1) p { font-size: 0.92rem; max-width: 42ch; }
+.srv {
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 10px; padding: 36px;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.srv::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.srv:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border); }
+.srv:hover::after { transform: scaleX(1); }
+
+.srv-n {
+  font-family: var(--font-serif);
+  font-size: 4rem; font-weight: 700; color: rgba(184,148,59,0.08);
+  position: absolute; top: 12px; right: 20px; line-height: 1;
+}
+.srv-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--gold-pale); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 20px;
+  transition: background 0.3s;
+}
+.srv:hover .srv-icon { background: var(--gold); }
+.srv h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
+.srv p { font-size: 0.88rem; color: var(--slate); line-height: 1.7; }
+.srv-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 20px; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+}
+.srv-tag::before { content: '–'; }
+
+/* ════════════════════════════════════════════════════════
+   NUMBERS BAND
+════════════════════════════════════════════════════════ */
+.numbers-band {
+  background: var(--charcoal); padding: 80px 0;
+}
+.numbers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.nb-item {
+  padding: 0 32px; border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center;
+}
+.nb-item:last-child { border-right: none; }
+.nb-num {
+  font-family: var(--font-serif);
+  font-size: 3.8rem; font-weight: 700; line-height: 1;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nb-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-top: 8px; }
+.nb-sub { font-size: 0.82rem; color: rgba(255,255,255,0.22); margin-top: 4px; }
+
+/* ════════════════════════════════════════════════════════
+   PROCESS
+════════════════════════════════════════════════════════ */
+.process-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+.proc {
+  position: relative; text-align: center;
+}
+.proc-connector {
+  position: absolute; top: 30px; left: 50%; width: 100%; height: 1px;
+  background: linear-gradient(90deg, var(--gold-light), var(--border));
+  z-index: 0;
+}
+.proc:last-child .proc-connector { display: none; }
+.proc-ring {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; position: relative; z-index: 1;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.proc-ring span {
+  font-family: var(--font-serif);
+  font-size: 1.4rem; font-weight: 700; color: var(--gold);
+}
+.proc:hover .proc-ring {
+  background: var(--gold); border-color: var(--gold); box-shadow: var(--shadow-gold);
+}
+.proc:hover .proc-ring span { color: var(--white); }
+.proc h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+.proc p { font-size: 0.8rem; color: var(--slate); }
+
+/* ════════════════════════════════════════════════════════
+   PROJECTS
+════════════════════════════════════════════════════════ */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 18px;
+}
+.proj {
+  border-radius: 10px; overflow: hidden; position: relative;
+  border: 1px solid var(--border-soft);
+  cursor: pointer; transition: transform 0.3s;
+}
+.proj:hover { transform: scale(1.015); }
+.proj:nth-child(1) { grid-column: span 2; }
+.proj-inner {
+  aspect-ratio: 4/3; display: flex; align-items: flex-end; padding: 24px;
+  background: linear-gradient(135deg, var(--cream-deep) 0%, var(--gold-pale) 100%);
+  position: relative;
+}
+.proj:nth-child(1) .proj-inner { aspect-ratio: 16/9; }
+.proj-bg-icon {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 5rem; opacity: 0.13;
+}
+.proj-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,23,20,0.7) 0%, transparent 55%);
+}
+.proj-info { position: relative; z-index: 1; }
+.proj-cat { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 5px; font-weight: 600; }
+.proj-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--white); }
+
+/* ════════════════════════════════════════════════════════
+   BLOG
+════════════════════════════════════════════════════════ */
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.blog-card {
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 10px; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.blog-thumb {
+  height: 188px; display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--gold-pale) 100%);
+}
+.blog-thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(184,148,59,0.04), transparent);
+}
+.blog-body { padding: 26px; }
+.blog-tag {
+  display: inline-flex; background: var(--gold-pale); border: 1px solid var(--border);
+  border-radius: 50px; padding: 3px 12px; font-size: 0.65rem;
+  color: var(--gold); font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.blog-card h3 { font-size: 1.1rem; margin-bottom: 10px; line-height: 1.45; letter-spacing: -0.01em; }
+.blog-card p { font-size: 0.85rem; color: var(--slate); margin-bottom: 20px; line-height: 1.65; }
+.blog-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mist); }
+.blog-read {
+  color: var(--gold); text-decoration: none; font-size: 0.8rem;
+  font-weight: 700; display: flex; align-items: center; gap: 6px;
+  letter-spacing: 0.04em; transition: gap 0.2s;
+}
+.blog-read:hover { gap: 10px; }
+
+/* ════════════════════════════════════════════════════════
+   TESTIMONIALS
+════════════════════════════════════════════════════════ */
+.testi-track {
+  display: flex; gap: 20px; overflow: hidden;
+  animation: marqueeT 38s linear infinite; width: max-content;
+  margin-top: 56px;
+}
+.testi-track:hover { animation-play-state: paused; }
+@keyframes marqueeT { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.testi-card {
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 18px; padding: 30px 28px; width: 340px; flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 14px; }
+.testi-card blockquote {
+  font-family: var(--font-serif); font-size: 1.02rem;
+  color: var(--stone); font-style: normal; font-weight: 600; line-height: 1.65;
+  margin-bottom: 20px;
+}
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-av {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.88rem; font-weight: 700; color: var(--white);
+}
+.testi-name { font-size: 0.88rem; font-weight: 600; color: var(--charcoal); }
+.testi-role { font-size: 0.75rem; color: var(--slate); }
+
+/* ════════════════════════════════════════════════════════
+   CONTACT / ENQUIRY
+════════════════════════════════════════════════════════ */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
+.cinfo h2 { font-size: clamp(2rem, 3vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 8px; }
+.cinfo > p { color: var(--slate); font-size: 0.97rem; margin-bottom: 40px; line-height: 1.75; }
+
+.cinfo-items { display: flex; flex-direction: column; gap: 14px; }
+.c-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 12px; padding: 16px 18px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.c-item:hover { border-color: var(--border); box-shadow: var(--shadow-sm); }
+.c-icon {
+  width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+  background: var(--gold-pale); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+}
+.c-label { font-size: 0.7rem; color: var(--mist); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.c-val { font-size: 0.92rem; font-weight: 500; color: var(--charcoal); }
+
+/* FORM */
+.enquiry-form {
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 22px; padding: 40px;
+  box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+}
+.enquiry-form::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(184,148,59,0.07) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.f-title { font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 4px; }
+.f-sub { font-size: 0.83rem; color: var(--slate); margin-bottom: 28px; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+.f-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--stone); }
+.f-group input,
+.f-group select,
+.f-group textarea {
+  background: var(--cream); border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 9px; padding: 12px 14px; color: var(--charcoal);
+  font-family: var(--font-sans); font-size: 0.9rem;
+  outline: none; transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  width: 100%;
+}
+.f-group input::placeholder, .f-group textarea::placeholder { color: var(--mist); }
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus {
+  border-color: var(--gold); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(184,148,59,0.1);
+}
+.f-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23B8943B' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  background-size: 10px; background-color: var(--cream);
+}
+.f-group textarea { resize: vertical; min-height: 110px; }
+.f-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 22px; }
+.f-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.f-check label { font-size: 0.79rem; color: var(--slate); }
+.f-check label a { color: var(--gold); text-decoration: none; font-weight: 600; }
+.f-check label a:hover { text-decoration: underline; }
+.btn-submit {
+  width: 100%; padding: 15px;
+  background: var(--charcoal); color: var(--white);
+  border: none; border-radius: 9px; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.92rem;
+  font-weight: 700; letter-spacing: 0.04em;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.btn-submit:hover { background: var(--gold); box-shadow: var(--shadow-gold); transform: translateY(-1px); }
+.form-success { display: none; text-align: center; padding: 36px 20px; }
+.form-success .tick { font-size: 3rem; margin-bottom: 14px; }
+.form-success h3 { font-size: 1.6rem; color: var(--gold); margin-bottom: 8px; }
+.form-success p { color: var(--slate); font-size: 0.88rem; }
+#form-error {
+  display: none;
+  color: #9a2f2f;
+  font-size: 0.84rem;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+/* ════════════════════════════════════════════════════════
+   CTA BAND
+════════════════════════════════════════════════════════ */
+.cta-band {
+  background: var(--charcoal); padding: 96px 0; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: '';
+  position: absolute; top: -80px; left: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cta-band::after {
+  content: '';
+  position: absolute; bottom: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cta-band .container { position: relative; z-index: 1; }
+.cta-band .label { color: var(--gold-light); }
+.cta-band h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--white); margin: 14px 0 16px; letter-spacing: -0.02em; line-height: 1.2;
+}
+.cta-band p { color: rgba(255,255,255,0.5); font-size: 1rem; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--charcoal); padding: 16px 36px; border-radius: 9px;
+  font-size: 0.92rem; font-weight: 700; text-decoration: none;
+  letter-spacing: 0.04em; border: none; cursor: pointer;
+  font-family: var(--font-sans);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.btn-gold:hover { box-shadow: 0 8px 32px rgba(201,168,76,0.4); transform: translateY(-2px); }
+
+/* ════════════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════════════ */
+footer {
+  background: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.04);
+}
+.footer-main {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; padding: 72px 0 48px;
+}
+.f-brand p { color: rgba(255,255,255,0.38); font-size: 0.85rem; margin: 16px 0 24px; max-width: 270px; line-height: 1.7; }
+.f-socials { display: flex; gap: 10px; }
+.f-social {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.85rem;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.f-social:hover { border-color: var(--gold); color: var(--gold); background: rgba(184,148,59,0.1); }
+.f-col h5 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.f-col ul a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.87rem; transition: color 0.3s; }
+.f-col ul a:hover { color: var(--white); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px; padding: 22px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.78rem; color: rgba(255,255,255,0.28);
+}
+.f-legal { display: flex; gap: 22px; }
+.f-legal a { color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.3s; }
+.f-legal a:hover { color: var(--gold); }
+
+/* ════════════════════════════════════════════════════════
+   MODALS
+════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(26,23,20,0.6);
+  backdrop-filter: blur(8px); z-index: 9998;
+  display: none; align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--white); border: 1px solid var(--border-soft);
+  border-radius: 22px; max-width: 760px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg); animation: modalIn 0.32s ease;
+}
+@keyframes modalIn { from{opacity:0;transform:scale(0.96) translateY(20px)} to{opacity:1;transform:none} }
+.modal::-webkit-scrollbar { width: 4px; }
+.modal::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 36px 0; position: sticky; top: 0; background: var(--white); z-index: 1;
+}
+.modal-head h2 { font-size: 1.55rem; letter-spacing: -0.02em; }
+.modal-x {
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--border-soft); background: var(--cream);
+  color: var(--stone); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 0.9rem;
+  transition: border-color 0.3s, background 0.3s;
+}
+.modal-x:hover { border-color: var(--border); background: var(--gold-pale); }
+.modal-body { padding: 24px 36px 36px; }
+.modal-date {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--gold-pale); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px;
+  font-size: 0.7rem; font-weight: 700; color: var(--gold); margin-bottom: 20px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.modal-body h3 {
+  font-family: var(--font-serif); font-size: 1.15rem;
+  color: var(--gold); margin: 24px 0 8px; letter-spacing: -0.01em;
+}
+.modal-body h3:first-of-type { margin-top: 0; }
+.modal-body p { color: var(--slate); font-size: 0.88rem; line-height: 1.8; margin-bottom: 10px; }
+.modal-body ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.modal-body ul li {
+  color: var(--slate); font-size: 0.88rem; line-height: 1.75;
+  padding-left: 18px; position: relative;
+}
+.modal-body ul li::before { content: '—'; color: var(--gold); position: absolute; left: 0; }
+.modal-divider { height: 1px; background: var(--border-soft); margin: 20px 0; }
+
+/* ════════════════════════════════════════════════════════
+   KEYFRAMES
+════════════════════════════════════════════════════════ */
+@keyframes fadeInDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:none} }
+@keyframes fadeInUp   { from{opacity:0;transform:translateY(28px)}  to{opacity:1;transform:none} }
+@keyframes fadeIn     { from{opacity:0} to{opacity:1} }
+@keyframes slideUp    { from{opacity:0;transform:translateX(-50%) translateY(18px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    row-gap: 36px;
+    align-items: start;
+  }
+  .hero-visual {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    justify-self: center;
+  }
+  #hero { align-items: center; padding-top: 100px; }
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+  .services-grid .srv:nth-child(n) { grid-column: auto; grid-row: auto; }
+  .services-grid .srv:nth-child(1) .srv-n { font-size: 4rem; }
+  .numbers-grid { grid-template-columns: repeat(2,1fr); gap: 40px 0; }
+  .nb-item:nth-child(2) { border-right: none; }
+}
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .proj:nth-child(1) { grid-column: span 2; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+  .f-brand { grid-column: span 2; }
+  .process-list { grid-template-columns: repeat(3,1fr); }
+  .proc-connector { display: none; }
+}
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .services-grid .srv:nth-child(1) h3 { font-size: 1.25rem; }
+  .services-grid .srv:nth-child(1) p { font-size: 0.88rem; max-width: none; }
+  .services-grid .srv:nth-child(1) .srv-n { font-size: 4rem; top: 12px; right: 20px; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .proj:nth-child(1) { grid-column: span 1; }
+  .numbers-grid { grid-template-columns: 1fr 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .f-brand { grid-column: auto; }
+  .f-row { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .hero-h1 { font-size: 2.8rem; }
+  .process-list { grid-template-columns: 1fr 1fr; }
+  .cta-band { padding: 72px 0; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ══════════ COOKIE BANNER ══════════ -->
+<div id="cookie-banner">
+  <p>We use cookies to improve your experience. See our <a href="#" onclick="openModal('cookies-modal');return false;">Cookie Policy</a> and <a href="#" onclick="openModal('privacy-modal');return false;">Privacy Policy</a>.</p>
+  <div class="ck-btns">
+    <button class="ck-decline" onclick="closeCookie()">Decline</button>
+    <button class="ck-accept" onclick="acceptCookie()">Accept All</button>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header id="site-header">
+  <nav>
+    <a href="#hero" class="logo-wrap" aria-label="Valadares Builders Solutions — Home">
+      <img
+        class="logo-img"
+        src="PHOTO-2026-04-13-21-30-08-Photoroom.png"
+        alt="Valadares Builders Solutions — VBS"
+        width="280"
+        height="72"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Insights</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mob-menu">
+  <a href="#about"    onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#blog"     onclick="toggleMenu()">Insights</a>
+  <a href="#contact"  onclick="toggleMenu()">Get in Touch</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-media" aria-hidden="true">
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="hero-poster.jpg"
+    >
+      <!-- MP4 H.264: Chrome, Firefox, Edge, Safari -->
+      <source src="hero-background.mp4" type="video/mp4" />
+      <!-- Original MOV (HEVC): fallback onde o browser aceitar QuickTime -->
+      <source src="gemini_generated_video_CE48FCBB%202.mov" type="video/quicktime" />
+    </video>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge"><span></span>Construction &amp; renovation</div>
+      <h1 class="hero-h1">
+        Building your vision<br/>
+        <em>beyond expectation.</em>
+      </h1>
+      <p class="hero-p">Valadares Builders Solutions handles construction, renovation, and project management with a straight-talking crew, fair pricing, and workmanship built to last.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-dark">Request a Free Quote</a>
+        <a href="#services" class="btn-ghost">Explore Our Services →</a>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-bar"></div>
+        <span class="scroll-txt">Scroll</span>
+      </div>
+    </div>
+
+    <aside class="hero-visual" style="animation: fadeIn 1s 0.7s ease both;" aria-label="Highlights">
+      <div class="h-card">
+        <div class="h-card-icon">🏆</div>
+        <h4>Award-winning delivery</h4>
+        <p>UK Construction Excellence Awards — recognised project delivery.</p>
+        <div class="h-card-pill">2023 · 2024</div>
+      </div>
+      <div class="h-stat-grid">
+        <div class="h-stat"><div class="num">500+</div><div class="lbl">Projects</div></div>
+        <div class="h-stat"><div class="num">98%</div><div class="lbl">Satisfaction</div></div>
+        <div class="h-stat"><div class="num">15+</div><div class="lbl">Years</div></div>
+        <div class="h-stat"><div class="num">50+</div><div class="lbl">Experts</div></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ══════════ TRUST STRIP ══════════ -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><span>✦</span> ISO 9001 Certified</div>
+    <div class="strip-item"><span>✦</span> NHBC Registered</div>
+    <div class="strip-item"><span>✦</span> RICS Affiliated</div>
+    <div class="strip-item"><span>✦</span> CHAS Accredited</div>
+    <div class="strip-item"><span>✦</span> LEED Certified Builds</div>
+    <div class="strip-item"><span>✦</span> FMB Member</div>
+    <div class="strip-item"><span>✦</span> Construction Line Gold</div>
+    <div class="strip-item"><span>✦</span> £10M Insured</div>
+    <!-- duplicate for loop -->
+    <div class="strip-item"><span>✦</span> ISO 9001 Certified</div>
+    <div class="strip-item"><span>✦</span> NHBC Registered</div>
+    <div class="strip-item"><span>✦</span> RICS Affiliated</div>
+    <div class="strip-item"><span>✦</span> CHAS Accredited</div>
+    <div class="strip-item"><span>✦</span> LEED Certified Builds</div>
+    <div class="strip-item"><span>✦</span> FMB Member</div>
+    <div class="strip-item"><span>✦</span> Construction Line Gold</div>
+    <div class="strip-item"><span>✦</span> £10M Insured</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════════ -->
+<section id="about" class="sec sec-alt">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-l">
+        <div class="about-img-main">🏛️</div>
+        <div class="about-img-badge">
+          <div class="badge-label">Est.</div>
+          <div class="badge-val">2009</div>
+        </div>
+        <div class="about-img-tag">
+          <div class="num">A+</div>
+          <div class="lbl">Rated &amp; Certified</div>
+        </div>
+      </div>
+
+      <div class="about-text reveal-r">
+        <p class="label">✦ Who We Are</p>
+        <h2>Excellence in every<br/>detail we build.</h2>
+        <div class="divider"></div>
+        <p>Valadares Builders Solutions was founded with a single purpose: to deliver construction projects that exceed expectations — on time, on budget, and built to last generations.</p>
+        <p>From residential renovations to large-scale commercial developments, our team of certified engineers, architects, and skilled tradespeople bring your vision to life with unparalleled precision.</p>
+        <ul class="feat-list">
+          <li><div class="feat-icon">🛡️</div><div class="feat-text"><strong>Licensed &amp; Fully Insured</strong><span>Comprehensive £10M public liability coverage on every project.</span></div></li>
+          <li><div class="feat-icon">📊</div><div class="feat-text"><strong>Transparent Pricing</strong><span>Detailed itemised quotes — no hidden costs, no surprises.</span></div></li>
+          <li><div class="feat-icon">🌿</div><div class="feat-text"><strong>Sustainable Practices</strong><span>Eco-friendly materials and energy-efficient building methods.</span></div></li>
+          <li><div class="feat-icon">🤝</div><div class="feat-text"><strong>Dedicated Support</strong><span>A named project manager on hand from start to handover.</span></div></li>
+        </ul>
+        <a href="#contact" class="btn-dark">Start Your Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════════════════════ -->
+<section id="services" class="sec">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="label">✦ What We Offer</p>
+      <h2>Our expert services</h2>
+      <div class="divider"></div>
+      <p>Comprehensive construction and building solutions tailored to meet the unique demands of every project.</p>
+    </div>
+    <div class="services-grid">
+      <div class="srv reveal"><span class="srv-n">01</span><div class="srv-icon">🏠</div><h3>Residential Construction</h3><p>Custom homes and luxury residences designed and built to the highest standards. From single-family homes to multi-unit developments, we turn architectural dreams into lasting realities.</p><div class="srv-tag">New Build &amp; Custom</div></div>
+      <div class="srv reveal"><span class="srv-n">02</span><div class="srv-icon">🏗️</div><h3>Commercial Development</h3><p>Office buildings, retail spaces, and industrial facilities constructed with meticulous attention to structural integrity, functionality, and aesthetic excellence.</p><div class="srv-tag">Commercial &amp; Industrial</div></div>
+      <div class="srv reveal"><span class="srv-n">03</span><div class="srv-icon">🔨</div><h3>Renovation &amp; Remodelling</h3><p>Breathe new life into existing structures. Kitchen upgrades, bathroom transformations, full interior overhauls — no project too large or small.</p><div class="srv-tag">Interior &amp; Exterior</div></div>
+      <div class="srv reveal"><span class="srv-n">04</span><div class="srv-icon">📐</div><h3>Architecture &amp; Design</h3><p>Our in-house design team creates innovative blueprints and full 3D visualisations so you can see and shape your project before a single brick is laid.</p><div class="srv-tag">Concept to Blueprint</div></div>
+      <div class="srv reveal"><span class="srv-n">05</span><div class="srv-icon">🌿</div><h3>Sustainable Building</h3><p>Green construction practices, LEED-compliant materials, and energy-efficient systems that reduce environmental impact without compromising on quality.</p><div class="srv-tag">Eco &amp; LEED Certified</div></div>
+      <div class="srv reveal"><span class="srv-n">06</span><div class="srv-icon">📋</div><h3>Project Management</h3><p>Full oversight from planning and permitting through to handover. We manage contractors, timelines, budgets, and compliance so you don't have to.</p><div class="srv-tag">Full Oversight</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NUMBERS BAND
+══════════════════════════════════════════════════════════ -->
+<div class="numbers-band">
+  <div class="container">
+    <div class="numbers-grid">
+      <div class="nb-item reveal"><div class="nb-num">15+</div><div class="nb-label">Years of Excellence</div><div class="nb-sub">Founded 2009</div></div>
+      <div class="nb-item reveal"><div class="nb-num">500+</div><div class="nb-label">Projects Completed</div><div class="nb-sub">Residential &amp; Commercial</div></div>
+      <div class="nb-item reveal"><div class="nb-num">98%</div><div class="nb-label">Client Satisfaction</div><div class="nb-sub">Based on post-project surveys</div></div>
+      <div class="nb-item reveal"><div class="nb-num">50+</div><div class="nb-label">Expert Team Members</div><div class="nb-sub">Engineers, designers, trades</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PROCESS
+══════════════════════════════════════════════════════════ -->
+<section id="process" class="sec sec-alt">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="label">✦ How It Works</p>
+      <h2>Our proven process</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="process-list">
+      <div class="proc reveal"><div class="proc-connector"></div><div class="proc-ring"><span>01</span></div><h4>Initial Consultation</h4><p>We listen and understand your vision, site conditions, and budget to shape the perfect brief.</p></div>
+      <div class="proc reveal"><div class="proc-connector"></div><div class="proc-ring"><span>02</span></div><h4>Design &amp; Planning</h4><p>Architects produce detailed plans, 3D renders, and all permit documentation for approval.</p></div>
+      <div class="proc reveal"><div class="proc-connector"></div><div class="proc-ring"><span>03</span></div><h4>Transparent Quote</h4><p>A detailed, itemised quote with no hidden costs — you know exactly where every penny goes.</p></div>
+      <div class="proc reveal"><div class="proc-connector"></div><div class="proc-ring"><span>04</span></div><h4>Construction</h4><p>Expert craftsmen execute with precision. Regular site updates keep you informed at every stage.</p></div>
+      <div class="proc reveal"><div class="proc-connector"></div><div class="proc-ring"><span>05</span></div><h4>Handover &amp; Care</h4><p>Full inspection, documentation handover, and ongoing aftercare for lasting satisfaction.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════════════════════════ -->
+<section id="projects" class="sec">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="label">✦ Our Portfolio</p>
+      <h2>Featured projects</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏙️</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Commercial Development</div><div class="proj-name">Meridian Business Plaza</div></div></div></div>
+      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏡</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Luxury Residential</div><div class="proj-name">Oakridge Estate</div></div></div></div>
+      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏊</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Full Renovation</div><div class="proj-name">Lakeside Villa Overhaul</div></div></div></div>
+      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏬</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Retail &amp; Mixed-Use</div><div class="proj-name">Harbour Quarter Centre</div></div></div></div>
+      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🌿</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Sustainable Build</div><div class="proj-name">Green Meadows Eco Homes</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     BLOG
+══════════════════════════════════════════════════════════ -->
+<section id="blog" class="sec sec-alt">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="label">✦ Industry Insights</p>
+      <h2>Construction blog</h2>
+      <div class="divider"></div>
+      <p>Expert knowledge, industry trends, and practical advice from our specialists.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal"><div class="blog-thumb">🏗️<div class="blog-thumb-overlay"></div></div><div class="blog-body"><span class="blog-tag">Construction Tips</span><h3>5 Signs Your Home Needs a Structural Survey Before Renovation</h3><p>Before undertaking any major renovation, understanding your property's structural integrity can save tens of thousands and prevent dangerous surprises down the line.</p><div class="blog-meta"><span>March 2025 · 6 min</span><a href="#" class="blog-read">Read More →</a></div></div></div>
+      <div class="blog-card reveal"><div class="blog-thumb">🌿<div class="blog-thumb-overlay"></div></div><div class="blog-body"><span class="blog-tag">Sustainability</span><h3>How Sustainable Practices Are Reshaping UK Construction</h3><p>From passive house design to reclaimed materials, the construction industry is undergoing a green revolution — and VBS is at the forefront.</p><div class="blog-meta"><span>February 2025 · 8 min</span><a href="#" class="blog-read">Read More →</a></div></div></div>
+      <div class="blog-card reveal"><div class="blog-thumb">💷<div class="blog-thumb-overlay"></div></div><div class="blog-body"><span class="blog-tag">Budget Guide</span><h3>How to Budget Your Extension Project: A Complete 2025 Guide</h3><p>Material costs, labour rates, and planning fees explained clearly — everything you need to plan a realistic budget for your home extension.</p><div class="blog-meta"><span>January 2025 · 10 min</span><a href="#" class="blog-read">Read More →</a></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="sec" style="overflow:hidden;">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="label">✦ Client Stories</p>
+      <h2>What our clients say</h2>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div style="overflow:hidden;">
+    <div class="testi-track">
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"VBS transformed our Victorian terrace into a stunning modern home. The attention to detail was extraordinary — every finish was immaculate."</blockquote><div class="testi-author"><div class="testi-av">SR</div><div><div class="testi-name">Sarah Richardson</div><div class="testi-role">Residential Client, London</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"Our commercial build came in on time and under budget — unheard of in this industry. The project management was seamless from start to finish."</blockquote><div class="testi-author"><div class="testi-av">JM</div><div><div class="testi-name">James Morrison</div><div class="testi-role">Managing Director, TechSpace Ltd</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"From the initial consultation to final handover, VBS exceeded every expectation. Our eco home is beautiful, efficient, and built to last."</blockquote><div class="testi-author"><div class="testi-av">EP</div><div><div class="testi-name">Elena Patel</div><div class="testi-role">Homeowner, Surrey</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"The renovation of our restaurant was completed with minimal disruption and maximum quality. The team worked around our schedule perfectly."</blockquote><div class="testi-author"><div class="testi-av">CL</div><div><div class="testi-name">Carlos Lima</div><div class="testi-role">Restaurant Owner, Manchester</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"I've worked with many contractors over the years. VBS stands in a class of their own — professional, honest, and passionate about what they build."</blockquote><div class="testi-author"><div class="testi-av">AW</div><div><div class="testi-name">Amanda Wells</div><div class="testi-role">Property Developer</div></div></div></div>
+      <!-- Duplicates for infinite scroll -->
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"VBS transformed our Victorian terrace into a stunning modern home. The attention to detail was extraordinary — every finish was immaculate."</blockquote><div class="testi-author"><div class="testi-av">SR</div><div><div class="testi-name">Sarah Richardson</div><div class="testi-role">Residential Client, London</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"Our commercial build came in on time and under budget — unheard of in this industry. The project management was seamless from start to finish."</blockquote><div class="testi-author"><div class="testi-av">JM</div><div><div class="testi-name">James Morrison</div><div class="testi-role">Managing Director, TechSpace Ltd</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"From the initial consultation to final handover, VBS exceeded every expectation. Our eco home is beautiful, efficient, and built to last."</blockquote><div class="testi-author"><div class="testi-av">EP</div><div><div class="testi-name">Elena Patel</div><div class="testi-role">Homeowner, Surrey</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"The renovation of our restaurant was completed with minimal disruption and maximum quality. The team worked around our schedule perfectly."</blockquote><div class="testi-author"><div class="testi-av">CL</div><div><div class="testi-name">Carlos Lima</div><div class="testi-role">Restaurant Owner, Manchester</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><blockquote>"I've worked with many contractors over the years. VBS stands in a class of their own — professional, honest, and passionate about what they build."</blockquote><div class="testi-author"><div class="testi-av">AW</div><div><div class="testi-name">Amanda Wells</div><div class="testi-role">Property Developer</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA BAND
+══════════════════════════════════════════════════════════ -->
+<div class="cta-band">
+  <div class="container">
+    <p class="label">✦ Ready to Begin?</p>
+    <h2>Let's build something<br/>remarkable together.</h2>
+    <p>Whether you have a detailed brief or just an idea, our team is ready to help you every step of the way.</p>
+    <a href="#contact" class="btn-gold">Get Your Free Quote →</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT / ENQUIRY
+══════════════════════════════════════════════════════════ -->
+<section id="contact" class="sec sec-alt">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="cinfo reveal-l">
+        <p class="label">✦ Get in Touch</p>
+        <h2>Let's build<br/>something great.</h2>
+        <div class="divider"></div>
+        <p>Fill in the enquiry form and one of our specialists will be in touch within 24 business hours. No commitment required — just an honest conversation about your project.</p>
+        <div class="cinfo-items">
+          <div class="c-item"><div class="c-icon">📍</div><div><div class="c-label">Our Office</div><div class="c-val">123 Builder's Row, London, UK</div></div></div>
+          <div class="c-item"><div class="c-icon">📞</div><div><div class="c-label">Phone</div><div class="c-val">+44 (0) 20 1234 5678</div></div></div>
+          <div class="c-item"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val">info@valadsbuilders.com</div></div></div>
+          <div class="c-item"><div class="c-icon">🕐</div><div><div class="c-label">Office Hours</div><div class="c-val">Mon – Fri: 8:00am – 6:00pm</div></div></div>
+        </div>
+      </div>
+
+      <div class="reveal-r">
+        <form class="enquiry-form" id="enquiry-form" onsubmit="submitForm(event)">
+          <div id="form-content">
+            <h3 class="f-title">Send an Enquiry</h3>
+            <p class="f-sub">We'll respond within 24 business hours.</p>
+            <p id="form-error" role="alert"></p>
+            <div class="f-row">
+              <div class="f-group"><label for="enq-first">First Name *</label><input id="enq-first" name="firstName" type="text" placeholder="John" required autocomplete="given-name" /></div>
+              <div class="f-group"><label for="enq-last">Last Name *</label><input id="enq-last" name="lastName" type="text" placeholder="Smith" required autocomplete="family-name" /></div>
+            </div>
+            <div class="f-group"><label for="enq-email">Email Address *</label><input id="enq-email" name="email" type="email" placeholder="john@example.com" required autocomplete="email" /></div>
+            <div class="f-group"><label for="enq-phone">Phone Number</label><input id="enq-phone" name="phone" type="tel" placeholder="+44 7700 000 000" autocomplete="tel" /></div>
+            <div class="f-group">
+              <label for="enq-service">Service Required *</label>
+              <select id="enq-service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option value="Residential Construction">Residential Construction</option>
+                <option value="Commercial Development">Commercial Development</option>
+                <option value="Renovation &amp; Remodelling">Renovation &amp; Remodelling</option>
+                <option value="Architecture &amp; Design">Architecture &amp; Design</option>
+                <option value="Sustainable Building">Sustainable Building</option>
+                <option value="Project Management">Project Management</option>
+                <option value="General Enquiry">General Enquiry</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label for="enq-budget">Estimated Budget</label>
+              <select id="enq-budget" name="budget">
+                <option value="" disabled selected>Select range...</option>
+                <option value="Under £25,000">Under £25,000</option>
+                <option value="£25,000 – £75,000">£25,000 – £75,000</option>
+                <option value="£75,000 – £200,000">£75,000 – £200,000</option>
+                <option value="£200,000 – £500,000">£200,000 – £500,000</option>
+                <option value="£500,000+">£500,000+</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="f-group"><label for="enq-details">Project Details *</label><textarea id="enq-details" name="details" placeholder="Tell us about your project, location, timeline, and any specific requirements..." required></textarea></div>
+            <div class="f-check">
+              <input type="checkbox" id="priv-chk" name="privacyConsent" value="yes" required />
+              <label for="priv-chk">I agree to the <a href="#" onclick="openModal('privacy-modal');return false;">Privacy Policy</a> and <a href="#" onclick="openModal('terms-modal');return false;">Terms &amp; Conditions</a> and consent to being contacted regarding my enquiry. *</label>
+            </div>
+            <button type="submit" class="btn-submit" id="enq-submit">Send Enquiry →</button>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="tick">✅</div>
+            <h3>Enquiry Received!</h3>
+            <p>Thank you for reaching out. A member of our team will be in touch within 24 business hours.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="f-brand">
+        <a href="#hero" class="logo-wrap" style="margin-bottom:6px;" aria-label="Valadares Builders Solutions — Home">
+          <img
+            class="logo-img"
+            src="PHOTO-2026-04-13-21-30-08-Photoroom.png"
+            alt="Valadares Builders Solutions — VBS"
+            width="280"
+            height="72"
+            decoding="async"
+            loading="lazy"
+          />
+        </a>
+        <p>Building excellence since 2009. Premium construction, renovation, and project management across the United Kingdom.</p>
+        <div class="f-socials">
+          <a href="#" class="f-social">in</a>
+          <a href="#" class="f-social">📷</a>
+          <a href="#" class="f-social">f</a>
+          <a href="#" class="f-social">𝕏</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Residential Build</a></li>
+          <li><a href="#services">Commercial Build</a></li>
+          <li><a href="#services">Renovations</a></li>
+          <li><a href="#services">Architecture</a></li>
+          <li><a href="#services">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#" onclick="openModal('terms-modal');return false;">Terms &amp; Conditions</a></li>
+          <li><a href="#" onclick="openModal('privacy-modal');return false;">Privacy Policy</a></li>
+          <li><a href="#" onclick="openModal('cookies-modal');return false;">Cookie Policy</a></li>
+          <li><a href="#" onclick="openModal('security-modal');return false;">Security Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Valadares Builders Solutions Ltd. All rights reserved. Registered in England &amp; Wales.</p>
+      <div class="f-legal">
+        <a href="#" onclick="openModal('terms-modal');return false;">Terms</a>
+        <a href="#" onclick="openModal('privacy-modal');return false;">Privacy</a>
+        <a href="#" onclick="openModal('cookies-modal');return false;">Cookies</a>
+        <a href="#" onclick="openModal('security-modal');return false;">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     MODALS
+══════════════════════════════════════════════════════════ -->
+
+<!-- TERMS -->
+<div class="modal-overlay" id="terms-modal" onclick="closeModalOutside(event,'terms-modal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Terms &amp; Conditions</h2><button class="modal-x" onclick="closeModal('terms-modal')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-date">📄 Last updated: 1 January 2025</div>
+      <h3>1. Introduction</h3>
+      <p>These Terms and Conditions govern your use of the Valadares Builders Solutions Ltd ("VBS") website and any services provided by VBS. By accessing this Website or engaging our services, you agree to be bound by these Terms in full.</p>
+      <p>We reserve the right to update these Terms at any time. Continued use of the Website constitutes acceptance of revised Terms.</p>
+      <div class="modal-divider"></div>
+      <h3>2. Services</h3>
+      <p>VBS provides construction, renovation, project management, architectural design, and related building services. All services are subject to a separate written contract agreed between VBS and the client prior to commencement of any work.</p>
+      <ul><li>Services described on this Website are for informational purposes and do not constitute a binding offer.</li><li>Quotations are valid for 30 days from the date of issue unless otherwise stated in writing.</li><li>VBS reserves the right to decline any project at its absolute discretion.</li><li>All projects require a signed contract and, where applicable, a deposit prior to commencement.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>3. Intellectual Property</h3>
+      <p>All content on this Website — including text, graphics, logos, photographs, architectural drawings, and software — is the exclusive intellectual property of VBS or its licensors and is protected by UK and international copyright law. You may not reproduce, distribute, or modify any content without prior written permission.</p>
+      <div class="modal-divider"></div>
+      <h3>4. Enquiry Form &amp; Communications</h3>
+      <p>Information submitted through our enquiry form is used solely to respond to your enquiry. Submitting an enquiry does not create a contractual relationship. We aim to respond within 24 business hours but cannot guarantee response times.</p>
+      <div class="modal-divider"></div>
+      <h3>5. Limitation of Liability</h3>
+      <p>To the maximum extent permitted by applicable law, VBS shall not be liable for any indirect, incidental, special, consequential, or punitive damages. Our total liability for any claim shall not exceed the total amount paid to VBS in the 12 months preceding the claim.</p>
+      <div class="modal-divider"></div>
+      <h3>6. Governing Law</h3>
+      <p>These Terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+      <div class="modal-divider"></div>
+      <h3>7. Contact</h3>
+      <p>For questions about these Terms: legal@valadsbuilders.com | 123 Builder's Row, London, United Kingdom.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="modal-overlay" id="privacy-modal" onclick="closeModalOutside(event,'privacy-modal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Privacy Policy</h2><button class="modal-x" onclick="closeModal('privacy-modal')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-date">🔒 Last updated: 1 January 2025 · UK GDPR Compliant</div>
+      <h3>1. Who We Are</h3>
+      <p>Valadares Builders Solutions Ltd is the data controller for your personal data. We are committed to protecting your privacy in accordance with the UK GDPR and the Data Protection Act 2018. Contact: privacy@valadsbuilders.com.</p>
+      <div class="modal-divider"></div>
+      <h3>2. Data We Collect</h3>
+      <ul><li><strong>Identity Data:</strong> First name, last name, title.</li><li><strong>Contact Data:</strong> Email address, phone number, postal address.</li><li><strong>Project Data:</strong> Details about your construction project, budget range, and requirements.</li><li><strong>Technical Data:</strong> IP address, browser type, pages visited, time on site (via cookies).</li><li><strong>Marketing Preferences:</strong> Your preferences regarding marketing communications.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>3. How We Use Your Data</h3>
+      <ul><li>To respond to your enquiry and provide our construction services.</li><li>To send you quotations, project updates, and contract documentation.</li><li>To comply with our legal and regulatory obligations.</li><li>To send marketing communications where you have provided consent.</li><li>To improve our Website through analytics.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>4. Legal Basis for Processing</h3>
+      <ul><li><strong>Contract performance:</strong> Processing necessary to perform a contract with you.</li><li><strong>Legitimate interests:</strong> Improving our services and communicating with prospective clients.</li><li><strong>Consent:</strong> For marketing communications and non-essential cookies.</li><li><strong>Legal obligation:</strong> Where required by law or regulation.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>5. Data Retention</h3>
+      <p>Enquiry data is retained for 24 months. Client project data is retained for 7 years for legal purposes. Technical data from cookies is retained as specified in our Cookie Policy.</p>
+      <div class="modal-divider"></div>
+      <h3>6. Your Rights</h3>
+      <p>Under UK GDPR you have the right to: access, rectification, erasure, restriction of processing, data portability, objection, and withdrawal of consent. Contact privacy@valadsbuilders.com. You may also lodge a complaint with the ICO at ico.org.uk.</p>
+      <div class="modal-divider"></div>
+      <h3>7. Data Security</h3>
+      <p>We implement appropriate technical and organisational measures to protect your personal data. See our Security Policy for full details.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIES -->
+<div class="modal-overlay" id="cookies-modal" onclick="closeModalOutside(event,'cookies-modal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Cookie Policy</h2><button class="modal-x" onclick="closeModal('cookies-modal')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-date">🍪 Last updated: 1 January 2025</div>
+      <h3>What Are Cookies?</h3>
+      <p>Cookies are small text files placed on your device when you visit a website. They allow the website to recognise your device and store certain information about your preferences or past actions.</p>
+      <div class="modal-divider"></div>
+      <h3>Strictly Necessary Cookies</h3>
+      <p>Essential for the Website to function. These cannot be switched off and do not store personally identifiable information.</p>
+      <ul><li><strong>session_id:</strong> Maintains your session state. Expires at end of browser session.</li><li><strong>cookie_consent:</strong> Stores your cookie consent preference. Expires after 12 months.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>Analytics Cookies</h3>
+      <p>Allow us to count visits and traffic sources to measure and improve our Website. All information collected is aggregated and anonymous. Requires your consent.</p>
+      <ul><li><strong>_ga, _gid:</strong> Google Analytics identifiers to distinguish users. Expires 2 years / 24 hours.</li><li><strong>_gat:</strong> Used to throttle request rate. Expires after 1 minute.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>Marketing Cookies</h3>
+      <p>Set by advertising partners to build a profile of your interests. Requires your consent.</p>
+      <ul><li><strong>_fbp:</strong> Facebook Pixel tracking. Expires after 3 months.</li><li><strong>ads/ga-audiences:</strong> Google Ads remarketing. Session-based.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>Managing Cookies</h3>
+      <p>You can control and delete cookies through your browser settings. Note that disabling cookies may affect Website functionality. For more information, visit www.aboutcookies.org.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY -->
+<div class="modal-overlay" id="security-modal" onclick="closeModalOutside(event,'security-modal')">
+  <div class="modal">
+    <div class="modal-head"><h2>Security Policy</h2><button class="modal-x" onclick="closeModal('security-modal')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-date">🛡️ Last updated: 1 January 2025 · ISO 27001 Aligned</div>
+      <h3>Our Commitment</h3>
+      <p>VBS is committed to protecting the security of your personal data. We adopt a risk-based approach aligned with ISO/IEC 27001 and the UK NCSC guidelines.</p>
+      <div class="modal-divider"></div>
+      <h3>Technical Measures</h3>
+      <ul><li><strong>TLS/SSL Encryption:</strong> All data in transit is encrypted using TLS 1.2 or higher.</li><li><strong>Secure Hosting:</strong> Enterprise-grade servers with physical and logical access controls.</li><li><strong>WAF &amp; IDS:</strong> Web application firewalls and intrusion detection systems monitor all traffic.</li><li><strong>Annual Penetration Testing:</strong> Performed by independent certified security professionals.</li><li><strong>Encryption at Rest:</strong> Sensitive data is encrypted using AES-256.</li><li><strong>Vulnerability Management:</strong> Regular patching schedule across all software dependencies.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>Organisational Measures</h3>
+      <ul><li><strong>Access Controls:</strong> Data access restricted on a need-to-know basis.</li><li><strong>Staff Training:</strong> Annual security and data protection training for all staff.</li><li><strong>Multi-Factor Authentication:</strong> Required for all internal systems containing personal data.</li><li><strong>Third-Party Vetting:</strong> All data processors subject to rigorous due diligence and data processing agreements.</li><li><strong>Incident Response:</strong> Documented plan with ICO notification within 72 hours where required.</li></ul>
+      <div class="modal-divider"></div>
+      <h3>Responsible Disclosure</h3>
+      <p>If you discover a security vulnerability, please report it to security@valadsbuilders.com. We acknowledge reports within 48 hours and commit to responsible remediation before any public disclosure.</p>
+      <div class="modal-divider"></div>
+      <h3>Contact</h3>
+      <p>Security enquiries: security@valadsbuilders.com | Data protection: privacy@valadsbuilders.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════ -->
+<script>
+/* ── HEADER + NAV ACTIVE (scroll) ─────── */
+function updateHeaderNav() {
+  const y = window.scrollY;
+  const header = document.getElementById('site-header');
+  header.classList.toggle('scrolled', y > 48);
+  let current = '';
+  document.querySelectorAll('section[id]').forEach(s => {
+    if (y >= s.offsetTop - 140) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('nav-active', a.getAttribute('href') === '#' + current);
+    a.style.removeProperty('color');
+  });
+}
+window.addEventListener('scroll', updateHeaderNav);
+updateHeaderNav();
+
+/* ── HERO VIDEO (autoplay em todos os browsers com MP4) ── */
+(function () {
+  const v = document.querySelector('.hero-video');
+  if (!v) return;
+  const kick = () => { v.play().catch(() => {}); };
+  v.addEventListener('loadeddata', kick, { once: true });
+  v.addEventListener('canplay', kick, { once: true });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+  kick();
+})();
+
+/* ── MOBILE MENU ───────────────────────── */
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mob-menu').classList.toggle('open');
+}
+
+/* ── SCROLL REVEAL ─────────────────────── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => obs.observe(el));
+
+/* ── MODALS ────────────────────────────── */
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e, id) {
+  if (e.target.id === id) closeModal(id);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+});
+
+/* ── COOKIE BANNER ─────────────────────── */
+function acceptCookie() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vbs_ck','1'); }
+function closeCookie()  { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vbs_ck','0'); }
+if (localStorage.getItem('vbs_ck')) document.getElementById('cookie-banner').style.display = 'none';
+
+/* ── ENQUIRY → GOOGLE SHEET (Apps Script Web App) ───────── */
+/* Cola aqui o URL de implementação depois de publicares o script (Deploy → Web app). */
+const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw2oD_Ymhp6SS_zl5wIrncC59kutXG9DHiH7gstZcyyi5RpZH5dAbNkTAp8h2hYHvXu/exec';
+/** Mete a false em produção para não logar dados do formulário no console. */
+const ENQUIRY_DEBUG = true;
+function enqLog() {
+  if (ENQUIRY_DEBUG) console.log.apply(console, ['[VBS enquiry]'].concat(Array.prototype.slice.call(arguments)));
+}
+function enqWarn() {
+  if (ENQUIRY_DEBUG) console.warn.apply(console, ['[VBS enquiry]'].concat(Array.prototype.slice.call(arguments)));
+}
+function enqErr() {
+  if (ENQUIRY_DEBUG) console.error.apply(console, ['[VBS enquiry]'].concat(Array.prototype.slice.call(arguments)));
+}
+
+async function submitForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('enquiry-form');
+  const errEl = document.getElementById('form-error');
+  const btn = document.getElementById('enq-submit');
+  errEl.style.display = 'none';
+  errEl.textContent = '';
+
+  if (!GOOGLE_SHEET_WEBAPP_URL || !GOOGLE_SHEET_WEBAPP_URL.startsWith('http')) {
+    enqWarn('URL da Web App não configurado ou inválido');
+    errEl.textContent = 'Configure GOOGLE_SHEET_WEBAPP_URL no ficheiro index.html com o URL do Google Apps Script (ver pasta google-apps-script).';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const payload = {
+    firstName: (form.querySelector('[name="firstName"]') || {}).value?.trim() || '',
+    lastName: (form.querySelector('[name="lastName"]') || {}).value?.trim() || '',
+    email: (form.querySelector('[name="email"]') || {}).value?.trim() || '',
+    phone: (form.querySelector('[name="phone"]') || {}).value?.trim() || '',
+    service: (form.querySelector('[name="service"]') || {}).value || '',
+    budget: (form.querySelector('[name="budget"]') || {}).value || '',
+    details: (form.querySelector('[name="details"]') || {}).value?.trim() || '',
+    privacyConsent: form.querySelector('#priv-chk')?.checked ? 'yes' : 'no',
+    submittedAt: new Date().toISOString()
+  };
+
+  enqLog('submit start', { url: GOOGLE_SHEET_WEBAPP_URL, payload: payload });
+
+  const prevLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  try {
+    const res = await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text();
+    enqLog('response', { status: res.status, ok: res.ok, bodyPreview: text.slice(0, 500) });
+    if (/^\s*</.test(text)) {
+      enqWarn('resposta parece HTML (não JSON) — rede/CORS/bloqueio ou URL errado?', text.slice(0, 200));
+    }
+    let data = {};
+    try {
+      data = JSON.parse(text);
+    } catch (parseErr) {
+      enqErr('JSON.parse falhou', parseErr, 'raw length', text.length);
+    }
+    if (!res.ok || data.ok === false) {
+      enqWarn('servidor recusou ou ok:false', { httpOk: res.ok, data: data });
+      throw new Error(data.error || ('HTTP ' + res.status) || 'Server error');
+    }
+    enqLog('success', data);
+    if (!data.spreadsheetId || !data.version) {
+      enqWarn(
+        'A Web App no Google ainda está ANTIGA (resposta sem spreadsheetId/version). ' +
+        'Cola o Enquiries.gs completo no Code.gs → Guardar → Implementar → Gerir implementações → Editar → Nova versão → Implementar.'
+      );
+    } else {
+      enqLog('abrir Sheet', 'https://docs.google.com/spreadsheets/d/' + data.spreadsheetId + '/edit — separador "' + (data.sheetName || 'Enquiries') + '"');
+    }
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch (err) {
+    enqErr('submit falhou', err && err.name, err && err.message, err);
+    const fallback = 'Could not send your enquiry. Please try again in a moment or contact us by email.';
+    const m = err && err.message ? String(err.message) : '';
+    errEl.textContent = (m && !/^Failed to fetch/i.test(m) && m !== 'NetworkError when attempting to fetch resource.') ? m : fallback;
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prevLabel;
+  }
+}
+
+</script>
+
+</body>
+</html>
