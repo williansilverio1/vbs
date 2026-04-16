@@ -16,9 +16,8 @@ type ServiceItem = {
   tag: string
   icon: LucideIcon
   featured?: boolean
-  /** Featured media: prefer MP4 video when set. */
+  /** Featured media: prefer MP4 video when set (no poster — só o vídeo). */
   videoSrc?: string
-  videoPoster?: string
   imageSrc?: string
   imageAlt?: string
 }
@@ -35,7 +34,6 @@ const SERVICES: ServiceItem[] = [
     icon: Home,
     featured: true,
     videoSrc: '/valadaresbuilders-services-hero.mp4',
-    videoPoster: '/hero-poster.jpg',
     imageAlt: 'Valadares Builders Solutions — team on site, residential construction',
   },
   {
@@ -108,8 +106,7 @@ function ServiceCard({ item }: { item: ServiceItem }) {
               muted
               loop
               playsInline
-              preload="metadata"
-              poster={item.videoPoster}
+              preload="auto"
               aria-label={item.imageAlt ?? item.title}
             >
               <source src={item.videoSrc} type="video/mp4" />

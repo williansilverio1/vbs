@@ -593,7 +593,7 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
 .srv-featured-media {
   flex: 1 1 46%;
   min-height: 220px;
-  background: linear-gradient(135deg, var(--cream-deep), var(--gold-pale));
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
