@@ -437,6 +437,8 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
    SECTION SHARED
 ════════════════════════════════════════════════════════ */
 .sec { padding: 112px 0; }
+/* Portfólio: menos padding vertical — galeria sticky ocupa o ecrã */
+.proj-scroll-section.sec { padding: 28px 0 88px; }
 .sec-alt { background: var(--white); }
 .sec-alt2 { background: var(--cream-deep); }
 
@@ -628,110 +630,55 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
 .proc p { font-size: 0.8rem; color: var(--slate); }
 
 /* ════════════════════════════════════════════════════════
-   PROJECTS
+   PROJECTS — scroll gallery (3 colunas, parallax / 3D leve)
 ════════════════════════════════════════════════════════ */
-.proj-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
-  gap: 18px;
-}
-.proj {
-  border-radius: 10px; overflow: hidden; position: relative;
-  border: 1px solid var(--border-soft);
-  cursor: pointer; transition: transform 0.3s;
-}
-.proj:hover { transform: scale(1.015); }
-.proj:nth-child(1) { grid-column: span 2; }
-.proj-inner {
-  aspect-ratio: 4/3; display: flex; align-items: flex-end; padding: 24px;
-  background: linear-gradient(135deg, var(--cream-deep) 0%, var(--gold-pale) 100%);
-  position: relative;
-}
-.proj:nth-child(1) .proj-inner { aspect-ratio: 16/9; }
-.proj-bg-icon {
-  position: absolute; inset: 0; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 5rem; opacity: 0.13;
-}
-.proj-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(26,23,20,0.7) 0%, transparent 55%);
-}
-.proj-info { position: relative; z-index: 1; }
-.proj-cat { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 5px; font-weight: 600; }
-.proj-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--white); }
-
-/* ── Featured projects: arc gallery (layout inspirado em ArcGalleryHero, cores VBS) ── */
-.proj-arc-block {
-  position: relative;
-  margin: 28px 0 48px;
-  padding-bottom: 24px;
-}
-.proj-arc-ring {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  --arc-radius: 280px;
-  --arc-card: 88px;
-  height: calc(var(--arc-radius) * 1.15);
-}
-.proj-arc-pivot {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-}
-.proj-arc-card {
-  position: absolute;
-  opacity: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  background: var(--white);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.proj-arc-card:hover { box-shadow: var(--shadow-lg); filter: brightness(1.05); }
-.proj-arc-card img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.proj-arc-card.proj-arc-visible {
-  animation: proj-arc-pop 0.75s ease-out forwards;
-}
-@keyframes proj-arc-pop {
-  from { opacity: 0; transform: var(--arc-from, translate(-50%, 50%)); }
-  to { opacity: 1; transform: var(--arc-card-transform, translate(-50%, 50%)); }
-}
-.proj-arc-content {
+.proj-scroll-section { position: relative; overflow-x: clip; }
+.proj-scroll-intro {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 36rem;
-  margin: -72px auto 0;
-  padding: 0 clamp(16px, 4vw, 28px);
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 4px clamp(12px, 3vw, 28px) 10px;
+  margin-bottom: clamp(20px, 4vh, 40px);
+  flex-shrink: 0;
 }
-.proj-arc-content h3 {
+.proj-scroll-intro .proj-scroll-h2 {
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
-  color: var(--charcoal);
-  margin: 10px 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 300;
   letter-spacing: -0.02em;
+  color: var(--charcoal);
+  line-height: 1.15;
+  margin: 0 0 10px;
 }
-.proj-arc-lead {
-  font-size: 0.92rem;
+.proj-scroll-intro .proj-scroll-h2 em {
+  font-style: normal;
+  font-weight: 300;
+  color: var(--gold);
+}
+.proj-scroll-intro .proj-scroll-lead {
+  font-size: 0.95rem;
   color: var(--slate);
-  line-height: 1.65;
-  margin-bottom: 22px;
+  line-height: 1.55;
+  margin: 0 0 12px;
 }
-.proj-arc-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-.proj-arc-btn {
+.proj-scroll-intro .proj-scroll-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+.proj-scroll-intro .proj-scroll-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.proj-scroll-intro .proj-scroll-link:hover { border-bottom-color: var(--gold); }
+.proj-scroll-intro .proj-arc-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -743,120 +690,234 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
   text-decoration: none;
   transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
 }
-.proj-arc-btn-primary {
+.proj-scroll-intro .proj-arc-btn-primary {
   background: var(--charcoal);
   color: var(--white);
   border: none;
-  cursor: pointer;
   box-shadow: var(--shadow-sm);
 }
-.proj-arc-btn-primary:hover { background: var(--gold); color: var(--charcoal); box-shadow: var(--shadow-gold); transform: translateY(-2px); }
-.proj-arc-btn-ghost {
-  background: transparent;
+.proj-scroll-intro .proj-arc-btn-primary:hover {
+  background: var(--gold);
   color: var(--charcoal);
-  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
 }
-.proj-arc-btn-ghost:hover { background: var(--gold-pale); border-color: var(--gold); }
-
-/* ── Featured projects: circular scroll gallery (inspirado em CircularGallery, cores VBS) ── */
-.proj-circular-scroll-wrap {
+.proj-scroll-blob {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(to right, rgba(184,148,59,0.28), rgba(26,23,20,0.12), rgba(247,243,238,0.45));
+  filter: blur(72px);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+/* Camada extra tipo demo Motion: glow suave (paleta VBS, screen) */
+.proj-scroll-blob-screen {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: -10% -20%;
+  background: linear-gradient(
+    105deg,
+    rgba(120, 110, 100, 0.35) 0%,
+    rgba(184, 148, 59, 0.22) 45%,
+    rgba(45, 55, 72, 0.2) 100%
+  );
+  filter: blur(84px);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+.proj-scroll-wrap {
   position: relative;
-  height: 220vh;
-  margin: 48px calc(-1 * clamp(18px, 3.5vw, 36px)) 0;
-  width: calc(100% + 2 * clamp(18px, 3.5vw, 36px));
+  height: 350vh;
+  margin-top: 0;
+  perspective: 1000px;
+  perspective-origin: center top;
 }
-.proj-circular-sticky {
+.proj-scroll-sticky {
   position: sticky;
   top: 0;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 45%, var(--cream) 100%);
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow-x: clip;
+  overflow-y: hidden;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 48%, var(--cream) 100%);
+  padding: calc(78px + 10px + env(safe-area-inset-top, 0px)) clamp(10px, 3vw, 20px) 12px;
+  box-sizing: border-box;
 }
-.proj-circular-heading {
-  position: absolute;
-  top: clamp(56px, 10vh, 88px);
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 5;
-  padding: 0 16px;
-  pointer-events: none;
-}
-.proj-circular-heading h3 {
-  font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 3.2vw, 1.75rem);
-  color: var(--charcoal);
-  margin-bottom: 6px;
-}
-.proj-circular-heading p {
-  font-size: 0.82rem;
-  color: var(--slate);
-  letter-spacing: 0.04em;
-}
-.proj-circular-root {
-  perspective: 2000px;
+/* Ocupa o espaço vertical restante no sticky e impede faixa “esmagada” */
+.proj-scroll-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(6px, 1.2vw, 10px);
   width: 100%;
-  max-width: min(1200px, 100vw);
-  height: min(480px, 52vh);
+  max-width: min(1420px, 100%);
+  flex: 1 1 0;
+  min-height: clamp(280px, calc(100dvh - 15.5rem), 78vh);
+  height: 0;
+  margin: 0 auto;
+  padding: 0 clamp(4px, 1.5vw, 12px);
+  transform-style: preserve-3d;
+  transform-origin: center top;
+  will-change: transform;
+  border-radius: 16px;
+  position: relative;
+  z-index: 1;
+}
+.proj-scroll-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.2vw, 10px);
+  will-change: transform;
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+/* Coluna central “subida” como mt-[-50%] do demo, com limites responsivos */
+.proj-scroll-col--mid { margin-top: clamp(-48vh, -35%, -120px); }
+.proj-scroll-col img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-soft);
+  display: block;
+}
+.proj-scroll-empty {
+  text-align: center;
+  color: var(--slate);
+  max-width: 28rem;
+  padding: 24px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.proj-scroll-empty code { font-size: 0.85em; background: var(--white); padding: 2px 6px; border-radius: 4px; }
+
+@media (max-width: 768px) {
+  .proj-scroll-col--mid { margin-top: 0; }
+  .proj-scroll-grid {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: min(52vh, 420px);
+    grid-template-rows: auto;
+  }
+  .proj-scroll-wrap { height: 290vh; }
+  .proj-scroll-sticky { min-height: 100dvh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .proj-scroll-grid,
+  .proj-scroll-col { transform: none !important; }
+  .proj-scroll-col--mid { margin-top: 0; }
+}
+
+/* ════════════════════════════════════════════════════════
+   PORTFOLIO — galeria circular GSAP (ver imagens uma a uma)
+════════════════════════════════════════════════════════ */
+.circ-gallery-section { overflow-x: clip; }
+.circ-gallery-mount { min-height: 400px; }
+.circ-gallery-root {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  touch-action: pan-y;
+  min-height: min(88vh, 760px);
+  padding: 16px clamp(12px, 4vw, 28px) 56px;
+  background: linear-gradient(180deg, var(--cream-deep) 0%, var(--cream) 100%);
 }
-.proj-circular-rotator {
+.circ-gallery-frame {
   position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.proj-circular-item {
-  position: absolute;
-  width: min(280px, 72vw);
-  height: min(360px, 58vw);
-  left: 50%;
-  top: 50%;
-  margin-left: calc(-0.5 * min(280px, 72vw));
-  margin-top: calc(-0.5 * min(360px, 58vw));
-  border-radius: 12px;
+  height: 80vmin;
+  width: 80vmin;
+  max-height: 600px;
+  max-width: 600px;
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-lg);
-  background: var(--white);
-  transition: opacity 0.35s linear;
-  backface-visibility: hidden;
+  background: var(--charcoal);
 }
-.proj-circular-item-inner { position: relative; width: 100%; height: 100%; }
-.proj-circular-item img {
+.circ-gallery-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.proj-circular-caption {
-  position: absolute;
-  bottom: 0;
   left: 0;
-  right: 0;
-  padding: 18px 16px 16px;
-  background: linear-gradient(to top, rgba(26,23,20,0.92) 0%, transparent 100%);
-  color: var(--white);
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
-.proj-circular-caption .pc-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; }
-.proj-circular-caption .pc-cat { font-size: 0.72rem; font-style: italic; opacity: 0.88; color: var(--gold-light); margin-top: 4px; }
-
-@media (max-width: 640px) {
-  .proj-circular-scroll-wrap { height: 200vh; margin-top: 32px; }
+.circ-gallery-svg { height: 100%; width: 100%; display: block; }
+.circ-gallery-tabs-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
 }
-
+.circ-gallery-tabs-layer svg { pointer-events: none; }
+.circ-gallery-tabs-layer .cg-tab-hit { pointer-events: auto; }
+.circ-gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 101;
+  display: flex;
+  height: 56px;
+  width: 56px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-50%);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  color: var(--charcoal);
+}
+.circ-gallery-nav:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.08);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+.circ-gallery-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.circ-gallery-nav--prev {
+  left: calc(50% - 40vmin - 36px);
+  transform: translate(-50%, -50%);
+}
+.circ-gallery-nav--prev:hover:not(:disabled) { transform: translate(-50%, -50%) scale(1.08); }
+.circ-gallery-nav--next {
+  right: calc(50% - 40vmin - 36px);
+  transform: translate(50%, -50%);
+}
+.circ-gallery-nav--next:hover:not(:disabled) { transform: translate(50%, -50%) scale(1.08); }
+@media (min-width: 640px) {
+  .circ-gallery-nav { height: 64px; width: 64px; }
+  .circ-gallery-nav--prev { left: calc(50% - 300px - 48px); }
+  .circ-gallery-nav--next { right: calc(50% - 300px - 48px); }
+}
+.circ-gallery-empty {
+  text-align: center;
+  color: var(--slate);
+  padding: 48px 24px;
+  max-width: 32rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+.circ-gallery-empty code { font-size: 0.85em; background: var(--white); padding: 2px 6px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) {
-  .proj-arc-card { animation: none !important; opacity: 1 !important; }
-  .proj-circular-rotator { transition: transform 0.15s linear; }
+  .circ-gallery-nav { transition: none; }
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1183,8 +1244,6 @@ footer {
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 52px; }
-  .proj-grid { grid-template-columns: 1fr 1fr; }
-  .proj:nth-child(1) { grid-column: span 2; }
   .blog-grid { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; }
   .f-brand { grid-column: span 2; }
@@ -1196,8 +1255,6 @@ footer {
   .services-grid .srv:nth-child(1) h3 { font-size: 1.25rem; }
   .services-grid .srv:nth-child(1) p { font-size: 0.88rem; max-width: none; }
   .services-grid .srv:nth-child(1) .srv-n { font-size: 4rem; top: 12px; right: 20px; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .proj:nth-child(1) { grid-column: span 1; }
   .numbers-grid { grid-template-columns: 1fr 1fr; }
   .footer-main { grid-template-columns: 1fr; }
   .f-brand { grid-column: auto; }
@@ -1269,10 +1326,8 @@ footer {
       preload="auto"
       poster="hero-poster.jpg"
     >
-      <!-- MP4 H.264: Chrome, Firefox, Edge, Safari -->
+      <source src="hero-gemini-master.mp4" type="video/mp4" />
       <source src="hero-background.mp4" type="video/mp4" />
-      <!-- Original MOV (HEVC): fallback onde o browser aceitar QuickTime -->
-      <source src="gemini_generated_video_CE48FCBB%202.mov" type="video/quicktime" />
     </video>
   </div>
   <div class="hero-scrim" aria-hidden="true"></div>
@@ -1428,45 +1483,52 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     PROJECTS
+     PROJECTS — galeria com scroll (imagens em /images + manifest.json)
 ══════════════════════════════════════════════════════════ -->
-<section id="projects" class="sec">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="label">✦ Our Portfolio</p>
-      <h2>Featured projects</h2>
-      <div class="divider"></div>
-    </div>
-
-    <!-- Arc gallery (padrão ArcGalleryHero — HTML/CSS/JS, paleta :root) -->
-    <div class="proj-arc-block reveal">
-      <div class="proj-arc-ring" id="proj-arc-ring" aria-hidden="true">
-        <div class="proj-arc-pivot" id="proj-arc-pivot"></div>
-      </div>
-      <div class="proj-arc-content">
-        <p class="label">✦ Selected work</p>
-        <h3>Craft, scale, and lasting quality</h3>
-        <p class="proj-arc-lead">A curated look at the kind of projects we deliver — commercial, residential, and sustainable builds across the UK.</p>
-        <div class="proj-arc-actions">
-          <a href="#contact" class="proj-arc-btn proj-arc-btn-primary">Discuss your project →</a>
-          <a href="#services" class="proj-arc-btn proj-arc-btn-ghost">Our services</a>
+<section id="projects" class="sec proj-scroll-section">
+  <div class="proj-scroll-wrap reveal" id="proj-scroll-wrap">
+    <div class="proj-scroll-sticky">
+      <div class="proj-scroll-blob" aria-hidden="true"></div>
+      <div class="proj-scroll-blob-screen" aria-hidden="true"></div>
+      <div class="proj-scroll-intro reveal">
+        <p class="label" style="margin-bottom: 8px;">✦ Our Portfolio</p>
+        <h3 class="proj-scroll-h2">Featured <em>portfolio</em><br />of our recent work</h3>
+        <p class="proj-scroll-lead">
+          A selection of projects across the UK — commercial, residential, and renovation.<br />
+          Scroll to explore the gallery.
+        </p>
+        <div class="proj-scroll-cta">
+          <a href="#contact" class="proj-arc-btn proj-arc-btn-primary">Request a quote →</a>
+          <a href="#contact" class="proj-scroll-link">Get in touch</a>
         </div>
       </div>
+      <div class="proj-scroll-grid" id="proj-scroll-grid" role="region" aria-label="Portfolio gallery">
+        <div class="proj-scroll-col" id="proj-scroll-col1"></div>
+        <div class="proj-scroll-col proj-scroll-col--mid" id="proj-scroll-col2"></div>
+        <div class="proj-scroll-col" id="proj-scroll-col3"></div>
+      </div>
+      <p class="proj-scroll-empty" id="proj-scroll-empty" hidden>
+        No images yet. Add files to the <code>images/</code> folder and update <code>images/manifest.json</code>.
+      </p>
     </div>
   </div>
+</section>
 
-  <!-- Circular scroll gallery (padrão CircularGallery — full-bleed, paleta :root) -->
-  <div class="proj-circular-scroll-wrap reveal" id="proj-circular-scroll-wrap">
-    <div class="proj-circular-sticky">
-      <div class="proj-circular-heading">
-        <h3>Featured schemes</h3>
-        <p>Scroll to rotate the gallery</p>
-      </div>
-      <div class="proj-circular-root">
-        <div class="proj-circular-rotator" id="proj-circular-rotator" role="region" aria-label="Featured project gallery"></div>
-      </div>
+<!-- ══════════════════════════════════════════════════════════
+     PORTFOLIO — galeria circular (GSAP, mesmas imagens que manifest.json)
+══════════════════════════════════════════════════════════ -->
+<section id="portfolio-carousel" class="sec sec-alt circ-gallery-section">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="label">✦ Closer look</p>
+      <h2>Each project in detail</h2>
+      <div class="divider"></div>
+      <p style="max-width:36rem;margin:0 auto;font-size:0.95rem;color:var(--slate);line-height:1.65;">
+        Open each photo below — thumbnails at the bottom, or use the arrows. Same images as the gallery above.
+      </p>
     </div>
   </div>
+  <div class="circ-gallery-mount" id="circ-gallery-mount" aria-live="polite"></div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
@@ -1855,140 +1917,538 @@ function acceptCookie() { document.getElementById('cookie-banner').style.display
 function closeCookie()  { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vbs_ck','0'); }
 if (localStorage.getItem('vbs_ck')) document.getElementById('cookie-banner').style.display = 'none';
 
-/* ── PORTFOLIO: arc gallery + circular 3D (vanilla — equivalente aos componentes React pedidos) ── */
+/* ── PORTFOLIO: galeria scroll 3 colunas (imagens em /images + manifest.json) ── */
 (function () {
-  var PROJ_ARC_IMAGES = [
-    { url: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=640&q=80&auto=format&fit=crop', alt: 'Construction site and cranes' },
-    { url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=640&q=80&auto=format&fit=crop', alt: 'Structural steel framework' },
-    { url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=640&q=80&auto=format&fit=crop', alt: 'Modern office towers' },
-    { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=640&q=80&auto=format&fit=crop', alt: 'Residential architecture' },
-    { url: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=640&q=80&auto=format&fit=crop', alt: 'Interior build progress' },
-    { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=640&q=80&auto=format&fit=crop', alt: 'Luxury home exterior' }
-  ];
-
-  var CIRCULAR_ITEMS = [
-    { name: 'Meridian Business Plaza', cat: 'Commercial Development', url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop', pos: '50% 45%' },
-    { name: 'Oakridge Estate', cat: 'Luxury Residential', url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80&auto=format&fit=crop', pos: '50% 40%' },
-    { name: 'Lakeside Villa Overhaul', cat: 'Full Renovation', url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop', pos: '55% 35%' },
-    { name: 'Harbour Quarter Centre', cat: 'Retail & Mixed-Use', url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop', pos: '50% 50%' },
-    { name: 'Green Meadows Eco Homes', cat: 'Sustainable Build', url: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=900&q=80&auto=format&fit=crop', pos: '50% 55%' }
-  ];
-
-  function arcDims() {
-    var w = window.innerWidth;
-    if (w < 640) return { r: 210, c: 68 };
-    if (w < 1024) return { r: 300, c: 86 };
-    return { r: 400, c: 104 };
+  function lerp(p, t0, t1, v0, v1) {
+    if (p <= t0) return v0;
+    if (p >= t1) return v1;
+    return v0 + (v1 - v0) * ((p - t0) / (t1 - t0));
   }
 
-  var arcResizeTimer = null;
-  function renderProjArc() {
-    var ring = document.getElementById('proj-arc-ring');
-    var pivot = document.getElementById('proj-arc-pivot');
-    if (!ring || !pivot) return;
-    var d = arcDims();
-    ring.style.setProperty('--arc-radius', d.r + 'px');
-    ring.style.setProperty('--arc-card', d.c + 'px');
-    ring.style.height = (d.r * 1.15) + 'px';
+  function splitThree(urls) {
+    var a = [], b = [], c = [];
+    urls.forEach(function (u, i) {
+      if (i % 3 === 0) a.push(u);
+      else if (i % 3 === 1) b.push(u);
+      else c.push(u);
+    });
+    return [a, b, c];
+  }
 
-    var start = 22;
-    var end = 158;
-    var n = Math.max(PROJ_ARC_IMAGES.length, 2);
-    var step = (end - start) / (n - 1);
-
-    pivot.innerHTML = '';
-    PROJ_ARC_IMAGES.forEach(function (im, i) {
-      var ang = start + step * i;
-      var rad = (ang * Math.PI) / 180;
-      var x = Math.cos(rad) * d.r;
-      var y = Math.sin(rad) * d.r;
-      var card = document.createElement('div');
-      card.className = 'proj-arc-card';
-      card.style.width = d.c + 'px';
-      card.style.height = d.c + 'px';
-      card.style.left = 'calc(50% + ' + x + 'px)';
-      card.style.bottom = y + 'px';
-      var t = 'translate(-50%, 50%) rotate(' + (ang / 5) + 'deg)';
-      card.style.setProperty('--arc-card-transform', t);
-      card.style.setProperty('--arc-from', 'translate(-50%, 58%)');
-      card.style.zIndex = String(n - i);
-      card.style.animationDelay = (i * 95) + 'ms';
+  function fillCol(el, urls, baseAlt) {
+    if (!el) return;
+    el.innerHTML = '';
+    urls.forEach(function (src, i) {
       var img = document.createElement('img');
-      img.src = im.url;
-      img.alt = im.alt || '';
+      img.src = src;
+      img.alt = baseAlt + ' ' + (i + 1);
       img.loading = 'lazy';
       img.decoding = 'async';
-      img.onerror = function () { this.src = 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80'; };
-      card.appendChild(img);
-      pivot.appendChild(card);
-      requestAnimationFrame(function () {
-        card.classList.add('proj-arc-visible');
-      });
+      el.appendChild(img);
     });
   }
 
-  function renderProjCircular() {
-    var rot = document.getElementById('proj-circular-rotator');
-    if (!rot) return;
-    var n = CIRCULAR_ITEMS.length;
-    var radius = Math.min(440, Math.max(220, window.innerWidth * 0.38));
-    rot.innerHTML = '';
-    CIRCULAR_ITEMS.forEach(function (it, i) {
-      var angle = (360 / n) * i;
-      var el = document.createElement('div');
-      el.className = 'proj-circular-item';
-      el.setAttribute('role', 'group');
-      el.setAttribute('aria-label', it.name);
-      el.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
-      var inner = document.createElement('div');
-      inner.className = 'proj-circular-item-inner';
-      var img = document.createElement('img');
-      img.src = it.url;
-      img.alt = '';
-      img.style.objectPosition = it.pos || 'center';
-      img.loading = 'lazy';
-      img.onerror = function () { this.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80'; };
-      var cap = document.createElement('div');
-      cap.className = 'proj-circular-caption';
-      cap.innerHTML = '<div class="pc-name"></div><div class="pc-cat"></div>';
-      cap.querySelector('.pc-name').textContent = it.name;
-      cap.querySelector('.pc-cat').textContent = it.cat;
-      inner.appendChild(img);
-      inner.appendChild(cap);
-      el.appendChild(inner);
-      rot.appendChild(el);
-    });
-  }
+  function updateScrollGallery() {
+    var wrap = document.getElementById('proj-scroll-wrap');
+    var grid = document.getElementById('proj-scroll-grid');
+    var c1 = document.getElementById('proj-scroll-col1');
+    var c2 = document.getElementById('proj-scroll-col2');
+    var c3 = document.getElementById('proj-scroll-col3');
+    if (!wrap || !grid) return;
 
-  function updateCircularRotation() {
-    var wrap = document.getElementById('proj-circular-scroll-wrap');
-    var rot = document.getElementById('proj-circular-rotator');
-    if (!wrap || !rot) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      rot.style.transform = 'rotateY(25deg)';
+      grid.style.transform = 'perspective(1000px) rotateX(0deg) scale(1)';
+      if (c1) c1.style.transform = '';
+      if (c2) c2.style.transform = '';
+      if (c3) c3.style.transform = '';
       return;
     }
+
     var top = wrap.getBoundingClientRect().top + window.scrollY;
     var scrollable = Math.max(1, wrap.offsetHeight - window.innerHeight);
     var y = window.scrollY - top;
     y = Math.max(0, Math.min(scrollable, y));
     var p = y / scrollable;
-    rot.style.transform = 'rotateY(' + (p * 360) + 'deg)';
+
+    var rotX = lerp(p, 0, 0.5, 75, 0);
+    var scale = p < 0.5 ? 1.2 : lerp(p, 0.5, 0.9, 1.2, 1);
+    grid.style.transform =
+      'perspective(1000px) rotateX(' + rotX + 'deg) scale(' + scale + ')';
+
+    var y1 = p <= 0.5 ? -10 : lerp(p, 0.5, 1, -10, 2);
+    var y2 = p <= 0.5 ? 15 : lerp(p, 0.5, 1, 15, 5);
+    if (c1) c1.style.transform = 'translateY(' + y1 + '%)';
+    if (c2) c2.style.transform = 'translateY(' + y2 + '%)';
+    if (c3) c3.style.transform = 'translateY(' + y1 + '%)';
   }
 
-  renderProjArc();
-  renderProjCircular();
-  window.addEventListener('scroll', updateCircularRotation, { passive: true });
-  updateCircularRotation();
+  function init() {
+    var grid = document.getElementById('proj-scroll-grid');
+    var emptyEl = document.getElementById('proj-scroll-empty');
+    if (!grid) return;
 
-  window.addEventListener('resize', function () {
-    clearTimeout(arcResizeTimer);
-    arcResizeTimer = setTimeout(function () {
-      renderProjArc();
-      renderProjCircular();
-      updateCircularRotation();
-    }, 120);
-  });
+    fetch('images/manifest.json', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('manifest');
+        return r.json();
+      })
+      .then(function (data) {
+        var files = Array.isArray(data) ? data : (data && data.images) || [];
+        var urls = files
+          .filter(function (f) { return typeof f === 'string' && f && !f.includes('..') && !f.includes('/'); })
+          .map(function (f) { return 'images/' + encodeURIComponent(f); });
+        if (urls.length === 0) throw new Error('empty');
+
+        var cols = splitThree(urls);
+        fillCol(document.getElementById('proj-scroll-col1'), cols[0], 'Portfolio');
+        fillCol(document.getElementById('proj-scroll-col2'), cols[1], 'Portfolio');
+        fillCol(document.getElementById('proj-scroll-col3'), cols[2], 'Portfolio');
+        if (emptyEl) emptyEl.hidden = true;
+        grid.hidden = false;
+      })
+      .catch(function () {
+        grid.hidden = true;
+        if (emptyEl) emptyEl.hidden = false;
+      })
+      .finally(function () {
+        updateScrollGallery();
+      });
+
+    window.addEventListener('scroll', updateScrollGallery, { passive: true });
+    window.addEventListener('resize', updateScrollGallery, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/* ── PORTFOLIO: galeria circular GSAP (manifest.json, abaixo do scroll) ── */
+(function () {
+  var CG_GAP = 10;
+  var CG_R = 7;
+  var CG_DURATION = 0.4;
+  var CG_W = 400;
+  var CG_H = 400;
+  var CG_SCALE = 700;
+  var CG_BIG = CG_R * CG_SCALE;
+  var CG_OVERLAP = 0;
+  var defaults = { transformOrigin: 'center center' };
+
+  function getPosSmall(id, total) {
+    return {
+      cx: CG_W / 2 - (total * (CG_R * 2 + CG_GAP) - CG_GAP) / 2 + id * (CG_R * 2 + CG_GAP),
+      cy: CG_H - 30,
+      r: CG_R
+    };
+  }
+  function getPosSmallAbove(id, total) {
+    return {
+      cx: CG_W / 2 - (total * (CG_R * 2 + CG_GAP) - CG_GAP) / 2 + id * (CG_R * 2 + CG_GAP),
+      cy: CG_H / 2,
+      r: CG_R * 2
+    };
+  }
+  function getPosCenter() {
+    return { cx: CG_W / 2, cy: CG_H / 2, r: CG_R * 7 };
+  }
+  function getPosEnd() {
+    return { cx: CG_W / 2 - CG_BIG + CG_OVERLAP, cy: CG_H / 2, r: CG_BIG };
+  }
+  function getPosStart() {
+    return { cx: CG_W / 2 + CG_BIG - CG_OVERLAP, cy: CG_H / 2, r: CG_BIG };
+  }
+
+  function titleFromFile(f) {
+    var s = String(f).replace(/\.[^./\\]+$/, '').replace(/[-_]+/g, ' ');
+    return s || 'Project';
+  }
+
+  function loadGsap() {
+    return new Promise(function (resolve, reject) {
+      if (window.gsap && window.MotionPathPlugin) {
+        window.gsap.registerPlugin(window.MotionPathPlugin);
+        resolve(window.gsap);
+        return;
+      }
+      var s1 = document.createElement('script');
+      s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
+      s1.onload = function () {
+        var s2 = document.createElement('script');
+        s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js';
+        s2.onload = function () {
+          if (window.gsap && window.MotionPathPlugin) {
+            window.gsap.registerPlugin(window.MotionPathPlugin);
+            resolve(window.gsap);
+          } else reject(new Error('GSAP'));
+        };
+        s2.onerror = function () { reject(new Error('MotionPathPlugin')); };
+        document.body.appendChild(s2);
+      };
+      s1.onerror = function () { reject(new Error('gsap.min')); };
+      document.body.appendChild(s1);
+    });
+  }
+
+  function mountReducedMotion(mount, images) {
+    var wrap = document.createElement('div');
+    wrap.className = 'circ-gallery-root';
+    wrap.style.minHeight = 'auto';
+    var inner = document.createElement('div');
+    inner.style.display = 'grid';
+    inner.style.gridTemplateColumns = 'repeat(auto-fill, minmax(160px, 1fr))';
+    inner.style.gap = '14px';
+    inner.style.maxWidth = '56rem';
+    inner.style.margin = '0 auto';
+    inner.style.padding = '8px clamp(12px, 4vw, 28px) 32px';
+    images.forEach(function (it) {
+      var a = document.createElement('a');
+      a.href = it.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', it.title);
+      var img = document.createElement('img');
+      img.src = it.url;
+      img.alt = it.title;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.style.width = '100%';
+      img.style.aspectRatio = '1';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '16px';
+      img.style.boxShadow = 'var(--shadow-md)';
+      a.appendChild(img);
+      inner.appendChild(a);
+    });
+    wrap.appendChild(inner);
+    mount.appendChild(wrap);
+  }
+
+  function buildCircularGallery(mount, images, gsap) {
+    var total = images.length;
+    var uid = 'cg' + Math.random().toString(36).slice(2, 9);
+    var opened = 0;
+    var inPlace = 0;
+    var disabled = false;
+    var autoplayTimer = null;
+    var clips = [];
+    var groups = [];
+    var layerEls = [];
+
+    var root = document.createElement('div');
+    root.className = 'circ-gallery-root';
+
+    var frame = document.createElement('div');
+    frame.className = 'circ-gallery-frame';
+
+    for (var i = 0; i < total; i++) {
+      var layer = document.createElement('div');
+      layer.className = 'circ-gallery-layer';
+      layer.dataset.index = String(i);
+
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + CG_W + ' ' + CG_H);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+      svg.setAttribute('class', 'circ-gallery-svg');
+
+      var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      var cpathId = uid + '_' + i + '_circleClip';
+      var spathId = uid + '_' + i + '_squareClip';
+
+      var cp = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+      cp.setAttribute('id', cpathId);
+      var circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circ.setAttribute('cx', '0');
+      circ.setAttribute('cy', '0');
+      circ.setAttribute('r', String(CG_R));
+      cp.appendChild(circ);
+      defs.appendChild(cp);
+
+      var sp = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+      sp.setAttribute('id', spathId);
+      var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('width', String(CG_W));
+      rect.setAttribute('height', String(CG_H));
+      sp.appendChild(rect);
+      defs.appendChild(sp);
+
+      svg.appendChild(defs);
+
+      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('clip-path', 'url(#' + cpathId + ')');
+
+      var im = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+      im.setAttribute('width', String(CG_W));
+      im.setAttribute('height', String(CG_H));
+      im.setAttribute('href', images[i].url);
+      im.setAttributeNS('http://www.w3.org/1999/xlink', 'href', images[i].url);
+
+      g.appendChild(im);
+      svg.appendChild(g);
+      layer.appendChild(svg);
+      frame.appendChild(layer);
+
+      clips.push(circ);
+      groups.push(g);
+      layerEls.push(layer);
+    }
+
+    function setGroupClip(idx, square) {
+      var id = uid + '_' + idx + (square ? '_squareClip' : '_circleClip');
+      groups[idx].setAttribute('clip-path', 'url(#' + id + ')');
+    }
+
+    function updateLayersZ() {
+      for (var z = 0; z < total; z++) {
+        layerEls[z].style.zIndex = inPlace === z ? String(z) : String(total + 1);
+      }
+    }
+
+    function initPositions() {
+      for (var j = 0; j < total; j++) {
+        if (j === 0) {
+          gsap.set(clips[j], Object.assign({}, defaults, getPosEnd()));
+          setGroupClip(j, true);
+        } else {
+          gsap.set(clips[j], Object.assign({}, defaults, getPosSmall(j, total)));
+          setGroupClip(j, false);
+        }
+      }
+      opened = 0;
+      inPlace = 0;
+      disabled = false;
+      updateLayersZ();
+    }
+
+    function armAutoplay() {
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+      autoplayTimer = window.setInterval(function () {
+        if (disabled || total < 2) return;
+        var n = opened + 1;
+        if (n >= total) n = 0;
+        onSelect(n);
+      }, 4500);
+    }
+
+    function runOpen(idx) {
+      var clip = clips[idx];
+      setGroupClip(idx, false);
+      gsap.set(clip, Object.assign({}, defaults, getPosSmall(idx, total)));
+      gsap
+        .timeline()
+        .to(clip, Object.assign({}, defaults, getPosCenter(), { duration: 0.2, ease: 'power3.inOut' }))
+        .to(
+          clip,
+          Object.assign({}, defaults, getPosEnd(), {
+            duration: CG_DURATION,
+            ease: 'power4.in',
+            onComplete: function () {
+              inPlace = idx;
+              setGroupClip(idx, true);
+              updateLayersZ();
+              disabled = false;
+              syncNavDisabled();
+              armAutoplay();
+            }
+          })
+        );
+    }
+
+    function runClose(idx) {
+      var clip = clips[idx];
+      var closeDelay = CG_DURATION + 0.2;
+      setGroupClip(idx, false);
+      gsap.set(clip, Object.assign({}, defaults, getPosStart()));
+      gsap
+        .timeline({ overwrite: true })
+        .to(
+          clip,
+          Object.assign({}, defaults, getPosCenter(), {
+            delay: closeDelay,
+            duration: CG_DURATION,
+            ease: 'power4.out'
+          })
+        )
+        .to(
+          clip,
+          Object.assign({}, defaults, getPosSmallAbove(idx, total), {
+            duration: 0.4,
+            ease: 'power2.out'
+          })
+        )
+        .to(clip, Object.assign({}, defaults, getPosSmall(idx, total), { duration: 0.6, ease: 'bounce.out' }));
+    }
+
+    function onSelect(idx) {
+      if (disabled || idx === opened) return;
+      disabled = true;
+      syncNavDisabled();
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+      var prev = opened;
+      opened = idx;
+      runClose(prev);
+      runOpen(opened);
+    }
+
+    /* Thumbnails overlay */
+    var tabLayer = document.createElement('div');
+    tabLayer.className = 'circ-gallery-tabs-layer';
+    var tabSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    tabSvg.setAttribute('viewBox', '0 0 ' + CG_W + ' ' + CG_H);
+    tabSvg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    tabSvg.style.height = '100%';
+    tabSvg.style.width = '100%';
+
+    function getTabX(ti) {
+      return CG_W / 2 - (total * (CG_R * 2 + CG_GAP) - CG_GAP) / 2 + ti * (CG_R * 2 + CG_GAP);
+    }
+    var tabY = CG_H - 30;
+
+    var tabDefs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    for (var t = 0; t < total; t++) {
+      var tcp = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+      tcp.setAttribute('id', uid + '_tab_' + t + '_clip');
+      var tcirc = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      tcirc.setAttribute('cx', String(getTabX(t)));
+      tcirc.setAttribute('cy', String(tabY));
+      tcirc.setAttribute('r', String(CG_R));
+      tcp.appendChild(tcirc);
+      tabDefs.appendChild(tcp);
+    }
+    tabSvg.appendChild(tabDefs);
+
+    for (var tj = 0; tj < total; tj++) {
+      (function (idx) {
+        var gtab = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        gtab.setAttribute('class', 'cg-tab-hit');
+        var tim = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        tim.setAttribute('x', String(getTabX(idx) - CG_R));
+        tim.setAttribute('y', String(tabY - CG_R));
+        tim.setAttribute('width', String(CG_R * 2));
+        tim.setAttribute('height', String(CG_R * 2));
+        tim.setAttribute('href', images[idx].url);
+        tim.setAttributeNS('http://www.w3.org/1999/xlink', 'href', images[idx].url);
+        tim.setAttribute('clip-path', 'url(#' + uid + '_tab_' + idx + '_clip)');
+        tim.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+        var hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        hit.setAttribute('cx', String(getTabX(idx)));
+        hit.setAttribute('cy', String(tabY));
+        hit.setAttribute('r', String(CG_R + 2));
+        hit.setAttribute('fill', 'rgba(255,255,255,0)');
+        hit.setAttribute('stroke', 'rgba(255,255,255,0.75)');
+        hit.setAttribute('stroke-width', '2');
+        hit.style.cursor = 'pointer';
+        hit.addEventListener('click', function () {
+          onSelect(idx);
+        });
+        gtab.appendChild(tim);
+        gtab.appendChild(hit);
+        tabSvg.appendChild(gtab);
+      })(tj);
+    }
+    tabLayer.appendChild(tabSvg);
+    frame.appendChild(tabLayer);
+
+    var btnPrev = document.createElement('button');
+    btnPrev.type = 'button';
+    btnPrev.className = 'circ-gallery-nav circ-gallery-nav--prev';
+    btnPrev.setAttribute('aria-label', 'Previous image');
+    btnPrev.innerHTML =
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
+
+    var btnNext = document.createElement('button');
+    btnNext.type = 'button';
+    btnNext.className = 'circ-gallery-nav circ-gallery-nav--next';
+    btnNext.setAttribute('aria-label', 'Next image');
+    btnNext.innerHTML =
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
+
+    function syncNavDisabled() {
+      btnPrev.disabled = disabled;
+      btnNext.disabled = disabled;
+    }
+
+    btnPrev.addEventListener('click', function () {
+      if (disabled) return;
+      var p = opened - 1;
+      if (p < 0) p = total - 1;
+      onSelect(p);
+    });
+    btnNext.addEventListener('click', function () {
+      if (disabled) return;
+      var n = opened + 1;
+      if (n >= total) n = 0;
+      onSelect(n);
+    });
+
+    root.appendChild(frame);
+    root.appendChild(btnPrev);
+    root.appendChild(btnNext);
+    mount.appendChild(root);
+
+    initPositions();
+    syncNavDisabled();
+
+    window.addEventListener(
+      'beforeunload',
+      function () {
+        if (autoplayTimer) window.clearInterval(autoplayTimer);
+      },
+      { once: true }
+    );
+
+    armAutoplay();
+  }
+
+  function showEmpty(mount) {
+    mount.innerHTML =
+      '<div class="circ-gallery-empty">No images yet. Add files to the <code>images/</code> folder and update <code>images/manifest.json</code>.</div>';
+  }
+
+  function initCirc() {
+    var mount = document.getElementById('circ-gallery-mount');
+    if (!mount) return;
+
+    fetch('images/manifest.json', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('manifest');
+        return r.json();
+      })
+      .then(function (data) {
+        var files = Array.isArray(data) ? data : (data && data.images) || [];
+        var safe = files.filter(function (f) {
+          return typeof f === 'string' && f && f.indexOf('..') === -1 && f.indexOf('/') === -1;
+        });
+        if (safe.length === 0) throw new Error('empty');
+        var images = safe.map(function (f) {
+          return { title: titleFromFile(f), url: 'images/' + encodeURIComponent(f) };
+        });
+        mount.innerHTML = '';
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          mountReducedMotion(mount, images);
+          return null;
+        }
+        return loadGsap()
+          .then(function (gsap) {
+            buildCircularGallery(mount, images, gsap);
+          })
+          .catch(function () {
+            mount.innerHTML = '';
+            mountReducedMotion(mount, images);
+          });
+      })
+      .catch(function () {
+        showEmpty(mount);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCirc);
+  } else {
+    initCirc();
+  }
 })();
 
 /* ── ENQUIRY → GOOGLE SHEET (Apps Script Web App) ───────── */
