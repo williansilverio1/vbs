@@ -662,6 +662,203 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
 .proj-cat { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 5px; font-weight: 600; }
 .proj-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--white); }
 
+/* ── Featured projects: arc gallery (layout inspirado em ArcGalleryHero, cores VBS) ── */
+.proj-arc-block {
+  position: relative;
+  margin: 28px 0 48px;
+  padding-bottom: 24px;
+}
+.proj-arc-ring {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  --arc-radius: 280px;
+  --arc-card: 88px;
+  height: calc(var(--arc-radius) * 1.15);
+}
+.proj-arc-pivot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+}
+.proj-arc-card {
+  position: absolute;
+  opacity: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.proj-arc-card:hover { box-shadow: var(--shadow-lg); filter: brightness(1.05); }
+.proj-arc-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.proj-arc-card.proj-arc-visible {
+  animation: proj-arc-pop 0.75s ease-out forwards;
+}
+@keyframes proj-arc-pop {
+  from { opacity: 0; transform: var(--arc-from, translate(-50%, 50%)); }
+  to { opacity: 1; transform: var(--arc-card-transform, translate(-50%, 50%)); }
+}
+.proj-arc-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 36rem;
+  margin: -72px auto 0;
+  padding: 0 clamp(16px, 4vw, 28px);
+}
+.proj-arc-content h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+  color: var(--charcoal);
+  margin: 10px 0 12px;
+  letter-spacing: -0.02em;
+}
+.proj-arc-lead {
+  font-size: 0.92rem;
+  color: var(--slate);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+.proj-arc-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.proj-arc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: max(16px, 0.88rem);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
+}
+.proj-arc-btn-primary {
+  background: var(--charcoal);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.proj-arc-btn-primary:hover { background: var(--gold); color: var(--charcoal); box-shadow: var(--shadow-gold); transform: translateY(-2px); }
+.proj-arc-btn-ghost {
+  background: transparent;
+  color: var(--charcoal);
+  border: 1.5px solid var(--border);
+}
+.proj-arc-btn-ghost:hover { background: var(--gold-pale); border-color: var(--gold); }
+
+/* ── Featured projects: circular scroll gallery (inspirado em CircularGallery, cores VBS) ── */
+.proj-circular-scroll-wrap {
+  position: relative;
+  height: 220vh;
+  margin: 48px calc(-1 * clamp(18px, 3.5vw, 36px)) 0;
+  width: calc(100% + 2 * clamp(18px, 3.5vw, 36px));
+}
+.proj-circular-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 45%, var(--cream) 100%);
+}
+.proj-circular-heading {
+  position: absolute;
+  top: clamp(56px, 10vh, 88px);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 5;
+  padding: 0 16px;
+  pointer-events: none;
+}
+.proj-circular-heading h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.proj-circular-heading p {
+  font-size: 0.82rem;
+  color: var(--slate);
+  letter-spacing: 0.04em;
+}
+.proj-circular-root {
+  perspective: 2000px;
+  width: 100%;
+  max-width: min(1200px, 100vw);
+  height: min(480px, 52vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+.proj-circular-rotator {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.proj-circular-item {
+  position: absolute;
+  width: min(280px, 72vw);
+  height: min(360px, 58vw);
+  left: 50%;
+  top: 50%;
+  margin-left: calc(-0.5 * min(280px, 72vw));
+  margin-top: calc(-0.5 * min(360px, 58vw));
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lg);
+  background: var(--white);
+  transition: opacity 0.35s linear;
+  backface-visibility: hidden;
+}
+.proj-circular-item-inner { position: relative; width: 100%; height: 100%; }
+.proj-circular-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.proj-circular-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 18px 16px 16px;
+  background: linear-gradient(to top, rgba(26,23,20,0.92) 0%, transparent 100%);
+  color: var(--white);
+}
+.proj-circular-caption .pc-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; }
+.proj-circular-caption .pc-cat { font-size: 0.72rem; font-style: italic; opacity: 0.88; color: var(--gold-light); margin-top: 4px; }
+
+@media (max-width: 640px) {
+  .proj-circular-scroll-wrap { height: 200vh; margin-top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proj-arc-card { animation: none !important; opacity: 1 !important; }
+  .proj-circular-rotator { transition: transform 0.15s linear; }
+}
+
 /* ════════════════════════════════════════════════════════
    BLOG
 ════════════════════════════════════════════════════════ */
@@ -1240,12 +1437,34 @@ footer {
       <h2>Featured projects</h2>
       <div class="divider"></div>
     </div>
-    <div class="proj-grid">
-      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏙️</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Commercial Development</div><div class="proj-name">Meridian Business Plaza</div></div></div></div>
-      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏡</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Luxury Residential</div><div class="proj-name">Oakridge Estate</div></div></div></div>
-      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏊</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Full Renovation</div><div class="proj-name">Lakeside Villa Overhaul</div></div></div></div>
-      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🏬</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Retail &amp; Mixed-Use</div><div class="proj-name">Harbour Quarter Centre</div></div></div></div>
-      <div class="proj reveal"><div class="proj-inner"><div class="proj-bg-icon">🌿</div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Sustainable Build</div><div class="proj-name">Green Meadows Eco Homes</div></div></div></div>
+
+    <!-- Arc gallery (padrão ArcGalleryHero — HTML/CSS/JS, paleta :root) -->
+    <div class="proj-arc-block reveal">
+      <div class="proj-arc-ring" id="proj-arc-ring" aria-hidden="true">
+        <div class="proj-arc-pivot" id="proj-arc-pivot"></div>
+      </div>
+      <div class="proj-arc-content">
+        <p class="label">✦ Selected work</p>
+        <h3>Craft, scale, and lasting quality</h3>
+        <p class="proj-arc-lead">A curated look at the kind of projects we deliver — commercial, residential, and sustainable builds across the UK.</p>
+        <div class="proj-arc-actions">
+          <a href="#contact" class="proj-arc-btn proj-arc-btn-primary">Discuss your project →</a>
+          <a href="#services" class="proj-arc-btn proj-arc-btn-ghost">Our services</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Circular scroll gallery (padrão CircularGallery — full-bleed, paleta :root) -->
+  <div class="proj-circular-scroll-wrap reveal" id="proj-circular-scroll-wrap">
+    <div class="proj-circular-sticky">
+      <div class="proj-circular-heading">
+        <h3>Featured schemes</h3>
+        <p>Scroll to rotate the gallery</p>
+      </div>
+      <div class="proj-circular-root">
+        <div class="proj-circular-rotator" id="proj-circular-rotator" role="region" aria-label="Featured project gallery"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1635,6 +1854,142 @@ document.addEventListener('keydown', e => {
 function acceptCookie() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vbs_ck','1'); }
 function closeCookie()  { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vbs_ck','0'); }
 if (localStorage.getItem('vbs_ck')) document.getElementById('cookie-banner').style.display = 'none';
+
+/* ── PORTFOLIO: arc gallery + circular 3D (vanilla — equivalente aos componentes React pedidos) ── */
+(function () {
+  var PROJ_ARC_IMAGES = [
+    { url: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=640&q=80&auto=format&fit=crop', alt: 'Construction site and cranes' },
+    { url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=640&q=80&auto=format&fit=crop', alt: 'Structural steel framework' },
+    { url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=640&q=80&auto=format&fit=crop', alt: 'Modern office towers' },
+    { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=640&q=80&auto=format&fit=crop', alt: 'Residential architecture' },
+    { url: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=640&q=80&auto=format&fit=crop', alt: 'Interior build progress' },
+    { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=640&q=80&auto=format&fit=crop', alt: 'Luxury home exterior' }
+  ];
+
+  var CIRCULAR_ITEMS = [
+    { name: 'Meridian Business Plaza', cat: 'Commercial Development', url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop', pos: '50% 45%' },
+    { name: 'Oakridge Estate', cat: 'Luxury Residential', url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80&auto=format&fit=crop', pos: '50% 40%' },
+    { name: 'Lakeside Villa Overhaul', cat: 'Full Renovation', url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=80&auto=format&fit=crop', pos: '55% 35%' },
+    { name: 'Harbour Quarter Centre', cat: 'Retail & Mixed-Use', url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop', pos: '50% 50%' },
+    { name: 'Green Meadows Eco Homes', cat: 'Sustainable Build', url: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=900&q=80&auto=format&fit=crop', pos: '50% 55%' }
+  ];
+
+  function arcDims() {
+    var w = window.innerWidth;
+    if (w < 640) return { r: 210, c: 68 };
+    if (w < 1024) return { r: 300, c: 86 };
+    return { r: 400, c: 104 };
+  }
+
+  var arcResizeTimer = null;
+  function renderProjArc() {
+    var ring = document.getElementById('proj-arc-ring');
+    var pivot = document.getElementById('proj-arc-pivot');
+    if (!ring || !pivot) return;
+    var d = arcDims();
+    ring.style.setProperty('--arc-radius', d.r + 'px');
+    ring.style.setProperty('--arc-card', d.c + 'px');
+    ring.style.height = (d.r * 1.15) + 'px';
+
+    var start = 22;
+    var end = 158;
+    var n = Math.max(PROJ_ARC_IMAGES.length, 2);
+    var step = (end - start) / (n - 1);
+
+    pivot.innerHTML = '';
+    PROJ_ARC_IMAGES.forEach(function (im, i) {
+      var ang = start + step * i;
+      var rad = (ang * Math.PI) / 180;
+      var x = Math.cos(rad) * d.r;
+      var y = Math.sin(rad) * d.r;
+      var card = document.createElement('div');
+      card.className = 'proj-arc-card';
+      card.style.width = d.c + 'px';
+      card.style.height = d.c + 'px';
+      card.style.left = 'calc(50% + ' + x + 'px)';
+      card.style.bottom = y + 'px';
+      var t = 'translate(-50%, 50%) rotate(' + (ang / 5) + 'deg)';
+      card.style.setProperty('--arc-card-transform', t);
+      card.style.setProperty('--arc-from', 'translate(-50%, 58%)');
+      card.style.zIndex = String(n - i);
+      card.style.animationDelay = (i * 95) + 'ms';
+      var img = document.createElement('img');
+      img.src = im.url;
+      img.alt = im.alt || '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function () { this.src = 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80'; };
+      card.appendChild(img);
+      pivot.appendChild(card);
+      requestAnimationFrame(function () {
+        card.classList.add('proj-arc-visible');
+      });
+    });
+  }
+
+  function renderProjCircular() {
+    var rot = document.getElementById('proj-circular-rotator');
+    if (!rot) return;
+    var n = CIRCULAR_ITEMS.length;
+    var radius = Math.min(440, Math.max(220, window.innerWidth * 0.38));
+    rot.innerHTML = '';
+    CIRCULAR_ITEMS.forEach(function (it, i) {
+      var angle = (360 / n) * i;
+      var el = document.createElement('div');
+      el.className = 'proj-circular-item';
+      el.setAttribute('role', 'group');
+      el.setAttribute('aria-label', it.name);
+      el.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
+      var inner = document.createElement('div');
+      inner.className = 'proj-circular-item-inner';
+      var img = document.createElement('img');
+      img.src = it.url;
+      img.alt = '';
+      img.style.objectPosition = it.pos || 'center';
+      img.loading = 'lazy';
+      img.onerror = function () { this.src = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80'; };
+      var cap = document.createElement('div');
+      cap.className = 'proj-circular-caption';
+      cap.innerHTML = '<div class="pc-name"></div><div class="pc-cat"></div>';
+      cap.querySelector('.pc-name').textContent = it.name;
+      cap.querySelector('.pc-cat').textContent = it.cat;
+      inner.appendChild(img);
+      inner.appendChild(cap);
+      el.appendChild(inner);
+      rot.appendChild(el);
+    });
+  }
+
+  function updateCircularRotation() {
+    var wrap = document.getElementById('proj-circular-scroll-wrap');
+    var rot = document.getElementById('proj-circular-rotator');
+    if (!wrap || !rot) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      rot.style.transform = 'rotateY(25deg)';
+      return;
+    }
+    var top = wrap.getBoundingClientRect().top + window.scrollY;
+    var scrollable = Math.max(1, wrap.offsetHeight - window.innerHeight);
+    var y = window.scrollY - top;
+    y = Math.max(0, Math.min(scrollable, y));
+    var p = y / scrollable;
+    rot.style.transform = 'rotateY(' + (p * 360) + 'deg)';
+  }
+
+  renderProjArc();
+  renderProjCircular();
+  window.addEventListener('scroll', updateCircularRotation, { passive: true });
+  updateCircularRotation();
+
+  window.addEventListener('resize', function () {
+    clearTimeout(arcResizeTimer);
+    arcResizeTimer = setTimeout(function () {
+      renderProjArc();
+      renderProjCircular();
+      updateCircularRotation();
+    }, 120);
+  });
+})();
 
 /* ── ENQUIRY → GOOGLE SHEET (Apps Script Web App) ───────── */
 /* Cola aqui o URL de implementação depois de publicares o script (Deploy → Web app). */
