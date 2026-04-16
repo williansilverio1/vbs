@@ -41,7 +41,11 @@
   --page-max:    min(1520px, 96vw);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Evita zoom por duplo-toque em muitos browsers móveis (mantém pinch-zoom). */
+  touch-action: manipulation;
+}
 
 body {
   font-family: var(--font-sans);
@@ -771,7 +775,9 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
 .f-group textarea {
   background: var(--cream); border: 1.5px solid rgba(0,0,0,0.08);
   border-radius: 9px; padding: 12px 14px; color: var(--charcoal);
-  font-family: var(--font-sans); font-size: 0.9rem;
+  font-family: var(--font-sans);
+  /* iOS Safari faz zoom ao focar se font-size < 16px — max(16px, …) evita isso. */
+  font-size: max(16px, 0.9rem);
   outline: none; transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
   width: 100%;
 }
@@ -796,7 +802,7 @@ footer .logo-wrap .logo-img { height: 42px; max-width: min(300px, 92vw); }
   width: 100%; padding: 15px;
   background: var(--charcoal); color: var(--white);
   border: none; border-radius: 9px; cursor: pointer;
-  font-family: var(--font-sans); font-size: 0.92rem;
+  font-family: var(--font-sans); font-size: max(16px, 0.92rem);
   font-weight: 700; letter-spacing: 0.04em;
   transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
 }
