@@ -141,7 +141,7 @@ export function EnquiryForm() {
         </div>
         <div className="f-group">
           <label htmlFor="enq-phone">Phone Number</label>
-          <input id="enq-phone" name="phone" type="tel" placeholder="+44 7700 000 000" autoComplete="tel" />
+          <input id="enq-phone" name="phone" type="tel" placeholder="+44 7748 323194" autoComplete="tel" />
         </div>
         <div className="f-group">
           <label htmlFor="enq-service">Service Required *</label>

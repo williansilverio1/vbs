@@ -32,3 +32,28 @@
     font-family: 'Source Sans 3', system-ui, sans-serif;
   }
 }
+
+/* Preflight is off — footer links must not fall back to browser blue / purple. */
+@layer components {
+  .site-footer {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .site-footer a:any-link {
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+  }
+
+  .site-footer a:visited {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .site-footer a:hover {
+    color: var(--gold);
+  }
+
+  .site-footer a.footer-mail:any-link,
+  .site-footer a.footer-mail:visited {
+    color: rgba(255, 255, 255, 0.96);
+  }
+}

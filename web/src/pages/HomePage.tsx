@@ -13,6 +13,7 @@ import { motion } from 'motion/react'
 import { EnquiryForm } from '@/components/EnquiryForm'
 import { BlogSection } from '@/components/ui/blog-section'
 import { CircularGallerySection } from '@/components/projects/CircularGallerySection'
+import { ConstructionInProgressSection } from '@/components/projects/ConstructionInProgressSection'
 import { ProjectsSection } from '@/components/projects/ProjectsSection'
 import { ServicesSection } from '@/components/services/ServicesSection'
 import { SiteFooter } from '@/components/SiteFooter'
@@ -331,6 +332,7 @@ export function HomePage({ portfolioUrls }: { portfolioUrls: string[] | undefine
       </section>
 
       <ProjectsSection imageUrls={portfolioUrls} />
+      <ConstructionInProgressSection />
       <CircularGallerySection />
 
       <BlogSection />
@@ -535,7 +537,14 @@ export function HomePage({ portfolioUrls }: { portfolioUrls: string[] | undefine
                   </div>
                   <div>
                     <div className="c-label">Phone</div>
-                    <div className="c-val">+44 (0) 20 1234 5678</div>
+                    <div className="c-val">
+                      <a
+                        href="tel:+447748323194"
+                        className="text-inherit no-underline hover:underline hover:decoration-gold/70"
+                      >
+                        +44 (0) 7748 323194
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div className="c-item">
