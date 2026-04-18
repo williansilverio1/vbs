@@ -13,11 +13,11 @@ export function SiteHeader() {
         <nav>
           <a href="#hero" className="logo-wrap" aria-label="Valadares Builders Solutions — Home">
             <img
-              className="logo-img"
+              className="logo-img bg-transparent"
               src="/valadares-logo.png"
               alt="Valadares Builders Solutions (VBS) logo"
               width={320}
-              height={134}
+              height={90}
               decoding="async"
               fetchPriority="high"
             />

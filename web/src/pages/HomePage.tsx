@@ -18,7 +18,7 @@ import { ProjectsSection } from '@/components/projects/ProjectsSection'
 import { ServicesSection } from '@/components/services/ServicesSection'
 import { SiteFooter } from '@/components/SiteFooter'
 
-const ABOUT_BRAND_IMAGE = '/about-vbs-brand.jpg'
+const ABOUT_BRAND_IMAGE = '/valadares-logo.png'
 
 const featIconProps = { size: 20, strokeWidth: 1.5, className: 'text-charcoal' }
 
@@ -164,12 +164,14 @@ export function HomePage({ portfolioUrls }: { portfolioUrls: string[] | undefine
               viewport={{ once: true, amount: 0.35, margin: '0px 0px -60px 0px' }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="about-img-main about-img-main--live">
+              <div className="about-img-main about-img-main--logo">
                 <div className="about-img-pan">
                   <img
                     className="about-img-photo"
                     src={ABOUT_BRAND_IMAGE}
-                    alt="VBS Valadares Builders Solutions — logo, services, and architectural design"
+                    alt="Valadares Builders Solutions (VBS) logo"
+                    width={560}
+                    height={158}
                     loading="lazy"
                     decoding="async"
                   />

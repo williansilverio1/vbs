@@ -116,11 +116,11 @@ export function SiteFooter() {
               aria-label="Valadares Builders Solutions — Home"
             >
               <img
-                className="logo-img h-10 w-auto max-w-[min(280px,88vw)] object-contain sm:h-11"
+                className="logo-img h-10 w-auto max-w-[min(280px,88vw)] bg-transparent object-contain object-left sm:h-11"
                 src="/valadares-logo.png"
                 alt="Valadares Builders Solutions (VBS) logo"
                 width={320}
-                height={134}
+                height={90}
                 decoding="async"
                 loading="lazy"
               />
