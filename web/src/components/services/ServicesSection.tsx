@@ -16,13 +16,19 @@ type ServiceItem = {
   tag: string
   icon: LucideIcon
   featured?: boolean
-  /** Featured media: prefer MP4 video when set (no poster — só o vídeo). */
+  /** Featured media: MP4 or MOV (QuickTime); browser support varies for MOV. */
   videoSrc?: string
   imageSrc?: string
   imageAlt?: string
 }
 
 const iconProps = { size: 22, strokeWidth: 1.5, className: 'text-charcoal' }
+
+function videoSourceType(src: string): string {
+  const s = src.split('?')[0].toLowerCase()
+  if (s.endsWith('.mov')) return 'video/quicktime'
+  return 'video/mp4'
+}
 
 const SERVICES: ServiceItem[] = [
   {
@@ -33,7 +39,7 @@ const SERVICES: ServiceItem[] = [
     tag: 'New Build & Custom',
     icon: Home,
     featured: true,
-    videoSrc: '/valadaresbuilders-services-hero.mp4',
+    videoSrc: '/copy_4AE40E12-467A-4345-8210-F4D5F49CE47F.MOV',
     imageAlt: 'Valadares Builders Solutions — team on site, residential construction',
   },
   {
@@ -109,7 +115,7 @@ function ServiceCard({ item }: { item: ServiceItem }) {
               preload="auto"
               aria-label={item.imageAlt ?? item.title}
             >
-              <source src={item.videoSrc} type="video/mp4" />
+              <source src={item.videoSrc} type={videoSourceType(item.videoSrc)} />
             </video>
           ) : (
             <img
